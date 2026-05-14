@@ -3,653 +3,1024 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plataforma de Operación Digital — Agencia Nathaly</title>
+<title>RedesSociales.cl · Plataforma SaaS · Nathaly Varela · 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+:root{
+  --ink:#0a0a0a;
+  --ink-2:#141414;
+  --ink-3:#1f1f1f;
+  --white:#ffffff;
+  --bone:#fafafa;
+  --gray:#9ca3af;
+  --gray-2:#6b7280;
+  --gray-3:#374151;
+  --border:rgba(255,255,255,.08);
+  --border-2:rgba(255,255,255,.14);
+  /* IG gradient · oficial */
+  --ig-1:#feda75; --ig-2:#fa7e1e; --ig-3:#d62976; --ig-4:#962fbf; --ig-5:#4f5bd5;
+  --ig:linear-gradient(135deg,#feda75 0%,#fa7e1e 25%,#d62976 50%,#962fbf 75%,#4f5bd5 100%);
+  /* TikTok */
+  --tt-cyan:#25f4ee;
+  --tt-pink:#fe2c55;
+  --tt:linear-gradient(135deg,#25f4ee 0%,#fe2c55 100%);
+  /* WhatsApp */
+  --wa:#25d366;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{overflow-x:hidden}
+body{
+  font-family:var(--font);background:var(--ink);color:var(--white);line-height:1.55;
+  -webkit-font-smoothing:antialiased;font-feature-settings:'kern','liga','calt';
+  -webkit-tap-highlight-color:rgba(254,44,85,.20);
+  touch-action:pan-y pinch-zoom;
+}
+img,video,svg{max-width:100%;height:auto;display:block}
 
-  :root {
-    --purple: #7C3AED;
-    --purple-light: #A78BFA;
-    --purple-dark: #5B21B6;
-    --gold: #D4A574;
-    --gold-light: #E8C9A0;
-    --bg: #0F0A1A;
-    --bg-card: rgba(255,255,255,0.04);
-    --text: #F1F0F5;
-    --text-muted: #9CA3AF;
-    --gradient-accent: linear-gradient(135deg, var(--purple), var(--gold));
-  }
+/* ════════════════════════════════════════
+   STORY PROGRESS BARS · top fixed · IG style
+   ════════════════════════════════════════ */
+.story-bars{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;gap:4px;padding:8px 12px;background:linear-gradient(180deg,rgba(10,10,10,.95) 0%,transparent 100%);
+  pointer-events:none;
+}
+.story-bar{flex:1;height:3px;background:rgba(255,255,255,.20);border-radius:2px;overflow:hidden;position:relative}
+.story-bar .fill{position:absolute;top:0;left:0;height:100%;width:0%;background:var(--ig);background-size:200% 100%;transition:width .12s linear;animation:igShimmer 3s linear infinite}
+@keyframes igShimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; font-size: 16px; }
-  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+/* ════════════════════════════════════════
+   NAV
+   ════════════════════════════════════════ */
+.nav{
+  position:fixed;top:14px;left:0;right:0;z-index:200;height:62px;
+  background:rgba(10,10,10,.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+}
+.nav-inner{max-width:1200px;margin:0 auto;width:100%;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:var(--ig);padding:2px;flex-shrink:0}
+.nav-avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:900;font-size:13px}
+.nav-name{font-size:15px;font-weight:800;color:var(--white);letter-spacing:-.01em}
+.nav-name .tld{background:var(--ig);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--gray);font-size:13px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{padding:9px 18px;font-size:12px;font-weight:700;color:var(--white);background:var(--ig);border-radius:99px;text-decoration:none;letter-spacing:.01em}
 
-  /* ── Nav ── */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(20px); background: rgba(15,10,26,0.85); border-bottom: 1px solid rgba(124,58,237,0.15); padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-  nav .logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  nav .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-  nav .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s; }
-  nav .nav-links a:hover { color: var(--purple-light); }
+main{padding-top:0}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
 
-  /* ── Sections ── */
-  section { min-height: 100vh; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; }
+/* ════════════════════════════════════════
+   HERO · Apple-style fullscreen
+   ════════════════════════════════════════ */
+.hero{
+  min-height:100vh;padding:120px 24px 60px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  background:radial-gradient(ellipse at 30% 20%,rgba(214,41,118,.18) 0%,transparent 60%),
+             radial-gradient(ellipse at 70% 80%,rgba(150,47,191,.18) 0%,transparent 60%),
+             radial-gradient(ellipse at 50% 50%,rgba(79,91,213,.10) 0%,transparent 70%),
+             var(--ink);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  opacity:.04;pointer-events:none;mix-blend-mode:overlay;
+}
+.hero-inner{position:relative;z-index:2;max-width:1100px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;background:rgba(255,255,255,.04);border:1px solid var(--border-2);border-radius:99px;margin-bottom:32px;font-size:12px;font-weight:600;color:var(--gray)}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--tt-pink);animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,7.2vw,7rem);font-weight:900;line-height:.95;letter-spacing:-.04em;
+  color:var(--white);margin:0 auto 28px;max-width:1000px;
+}
+.hero h1 .ig-text{background:var(--ig);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;display:inline-block}
+.hero h1 .tt-text{background:var(--tt);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.hero p.lead{font-size:clamp(1.05rem,2vw,1.4rem);color:var(--gray);max-width:720px;margin:0 auto 44px;line-height:1.55;font-weight:500}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+.btn-primary{padding:16px 32px;background:var(--ig);color:var(--white);border:none;border-radius:99px;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .25s;display:inline-flex;align-items:center;gap:10px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(214,41,118,.40)}
+.btn-secondary{padding:16px 28px;background:transparent;color:var(--white);border:1px solid var(--border-2);border-radius:99px;font-size:14px;font-weight:600;text-decoration:none;transition:background .2s,border-color .2s}
+.btn-secondary:hover{background:rgba(255,255,255,.04);border-color:var(--white)}
 
-  /* ── Hero ── */
-  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; padding-top: 4rem; }
-  .hero::before { content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
-  .hero .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 50px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); font-size: 0.8rem; color: var(--purple-light); font-weight: 500; margin-bottom: 2rem; }
-  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
-  .hero h1 span { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.7; }
-  .hero .client-info { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; justify-content: center; }
-  .hero .client-info .stat { text-align: center; }
-  .hero .client-info .stat-number { font-size: 2rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero .client-info .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; line-height: 1.4; }
+/* HERO PHONE MOCKUP · centered visual */
+.hero-phone{
+  margin-top:24px;position:relative;width:min(280px,68vw);aspect-ratio:9/19.5;
+  background:var(--ink-2);border:8px solid var(--ink-3);border-radius:42px;
+  box-shadow:0 80px 120px -40px rgba(214,41,118,.30),0 40px 80px -20px rgba(0,0,0,.50),0 0 0 1px rgba(255,255,255,.06);
+  overflow:hidden;
+}
+.hero-phone::before{
+  content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  width:90px;height:24px;background:#000;border-radius:99px;z-index:3;
+}
+.hero-phone-screen{position:absolute;inset:0;background:linear-gradient(180deg,#feda75 0%,#fa7e1e 20%,#d62976 50%,#962fbf 80%,#4f5bd5 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 16px 30px;color:var(--white);text-align:center}
+.hero-phone-screen .ps-label{font-size:9px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;opacity:.8;margin-bottom:10px}
+.hero-phone-screen .ps-num{font-family:var(--font-display);font-size:54px;font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.hero-phone-screen .ps-sub{font-size:11px;font-weight:600;opacity:.85;letter-spacing:.04em}
+.hero-phone-screen .ps-bars{display:flex;gap:4px;margin-top:18px}
+.hero-phone-screen .ps-bar{width:5px;background:rgba(255,255,255,.9);border-radius:2px;animation:waveform 1.6s ease-in-out infinite}
+.hero-phone-screen .ps-bar:nth-child(1){height:10px;animation-delay:0s}
+.hero-phone-screen .ps-bar:nth-child(2){height:22px;animation-delay:.15s}
+.hero-phone-screen .ps-bar:nth-child(3){height:32px;animation-delay:.30s}
+.hero-phone-screen .ps-bar:nth-child(4){height:20px;animation-delay:.45s}
+.hero-phone-screen .ps-bar:nth-child(5){height:14px;animation-delay:.60s}
+.hero-phone-screen .ps-bar:nth-child(6){height:26px;animation-delay:.75s}
+.hero-phone-screen .ps-bar:nth-child(7){height:18px;animation-delay:.90s}
+@keyframes waveform{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1.1)}}
 
-  /* ── Section headers ── */
-  .section-label { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--purple-light); font-weight: 600; margin-bottom: 1rem; }
-  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--gradient-accent); border-radius: 1px; }
-  h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
-  .section-desc { color: var(--text-muted); font-size: 1.05rem; max-width: 650px; margin-bottom: 3rem; line-height: 1.7; }
+/* HASHTAG MARQUEE */
+.hashtag-marquee{overflow:hidden;background:var(--ink);padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hashtag-track{display:flex;gap:38px;animation:marquee 26s linear infinite;width:max-content;white-space:nowrap}
+.hashtag-item{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:clamp(28px,4.5vw,52px);background:var(--ig);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em}
+.hashtag-item.gray{background:none;-webkit-text-fill-color:var(--gray-3);color:var(--gray-3)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-  /* ── Feature block ── */
-  .feature-block { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 5rem; }
-  .feature-block.reverse { direction: rtl; }
-  .feature-block.reverse > * { direction: ltr; }
-  .feature-block .feature-text h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
-  .feature-block .feature-text p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem; }
-  .feature-block .feature-text ul { list-style: none; padding: 0; }
-  .feature-block .feature-text ul li { padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.6rem; }
-  .feature-block .feature-text ul li::before { content: '✓'; color: var(--purple-light); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+/* ════════════════════════════════════════
+   SECTION FULL-BLEED · Apple-style
+   ════════════════════════════════════════ */
+section.bleed{padding:120px 0;position:relative;overflow:hidden}
+section.bleed-light{background:var(--bone);color:var(--ink)}
+section.bleed-light .lead{color:var(--gray-2)}
+section.bleed-light h2{color:var(--ink)}
+section.bleed-light .eyebrow{color:var(--ig-4)}
+section.bleed-grad{background:var(--ig);color:var(--white)}
 
-  /* ── UI Mockup ── */
-  .feature-img { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.08); position: relative; background: rgba(255,255,255,0.03); min-height: 280px; }
-  .feature-img .img-label { position: absolute; bottom: 12px; left: 12px; padding: 0.3rem 0.8rem; background: rgba(15,10,26,0.85); backdrop-filter: blur(10px); border-radius: 8px; font-size: 0.7rem; color: var(--purple-light); font-weight: 600; border: 1px solid rgba(124,58,237,0.2); }
-  .mock-chrome { background: rgba(255,255,255,0.05); padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .mock-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .mock-dot.r { background: #FF5F57; }
-  .mock-dot.y { background: #FFBD2E; }
-  .mock-dot.g { background: #28CA41; }
-  .mock-url { flex: 1; background: rgba(255,255,255,0.05); border-radius: 5px; height: 22px; padding: 0 10px; display: flex; align-items: center; font-size: 10px; color: rgba(255,255,255,0.3); font-family: monospace; }
-  .mock-body { padding: 16px; }
-  .mock-row { display: flex; gap: 10px; margin-bottom: 10px; }
-  .mock-card-sm { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 12px; flex: 1; }
-  .mc-num { font-size: 1.3rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .mc-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
-  .mock-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 9px; font-weight: 600; }
-  .mock-pill.ok { background: rgba(74,222,128,0.15); color: #4ADE80; }
-  .mock-pill.warn { background: rgba(251,191,36,0.15); color: #FCD34D; }
-  .mock-pill.danger { background: rgba(239,68,68,0.15); color: #F87171; }
-  .mock-list-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 10px; color: var(--text-muted); }
-  .mock-list-item:last-child { border-bottom: none; }
-  .mock-tag { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 8px; font-weight: 700; background: rgba(124,58,237,0.15); color: var(--purple-light); }
-  .mock-textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 10px; font-size: 9.5px; color: var(--text-muted); line-height: 1.55; margin-top: 8px; white-space: pre-wrap; }
-  .mock-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; background: linear-gradient(135deg,var(--purple),var(--gold)); border-radius: 6px; font-size: 9px; font-weight: 700; color: white; margin-top: 10px; }
-  .mock-chart-bar { display: flex; align-items: flex-end; gap: 5px; height: 70px; margin-top: 10px; }
-  .mock-bar-col { flex: 1; border-radius: 4px 4px 0 0; background: rgba(124,58,237,0.25); }
-  .mock-bar-col.hi { background: linear-gradient(180deg,var(--purple),rgba(124,58,237,0.15)); }
-  .mock-bar-col.gold { background: linear-gradient(180deg,var(--gold),rgba(212,165,116,0.15)); }
-  .mock-cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-top: 10px; }
-  .mock-cal-day { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.03); font-size: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
-  .mock-cal-day.has { background: rgba(124,58,237,0.2); color: var(--purple-light); font-weight: 600; }
-  .mock-cal-day.gap { background: rgba(239,68,68,0.12); color: #F87171; font-weight: 600; }
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--ig-4);margin-bottom:24px}
+.eyebrow .e-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+h2.title{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,5rem);font-weight:900;line-height:1;letter-spacing:-.035em;color:var(--white);margin-bottom:24px;max-width:920px}
+h2.title em{font-style:italic;font-weight:800;background:var(--ig);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+section.bleed-light h2.title em{background:var(--ig);-webkit-background-clip:text;background-clip:text;color:transparent}
+p.lead{font-size:clamp(1rem,1.4vw,1.2rem);color:var(--gray);max-width:740px;margin-bottom:60px;line-height:1.65;font-weight:500}
 
-  /* ── Full-width img area ── */
-  .full-img { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 60px rgba(0,0,0,0.5); margin: 2rem 0 3rem; position: relative; background: rgba(255,255,255,0.03); }
-  .full-img .img-label { position: absolute; bottom: 16px; left: 16px; padding: 0.35rem 0.9rem; background: rgba(15,10,26,0.85); backdrop-filter: blur(10px); border-radius: 8px; font-size: 0.75rem; color: var(--purple-light); font-weight: 600; border: 1px solid rgba(124,58,237,0.2); }
+/* SITUACIÓN HOY · data IG real */
+.real-data{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:48px}
+.real-phone{
+  background:var(--ink-2);border:6px solid var(--ink-3);border-radius:36px;
+  padding:24px 18px 20px;position:relative;
+  box-shadow:0 60px 100px -40px rgba(150,47,191,.30),0 30px 60px -20px rgba(0,0,0,.40);
+  max-width:340px;justify-self:end;
+}
+.real-phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:60px;height:18px;background:#000;border-radius:99px}
+.real-phone-header{display:flex;align-items:center;gap:12px;margin-top:30px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.real-avatar{width:56px;height:56px;border-radius:50%;background:var(--ig);padding:3px;flex-shrink:0}
+.real-avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:900;font-size:22px}
+.real-handle .h{font-size:14px;font-weight:800;color:var(--white)}
+.real-handle .b{font-size:11px;color:var(--gray);margin-top:2px}
+.real-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0;text-align:center}
+.real-stats .s{padding:8px 0}
+.real-stats .s-v{font-size:18px;font-weight:800;color:var(--white)}
+.real-stats .s-l{font-size:9px;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.real-bio{font-size:12px;color:var(--gray);line-height:1.5;padding:12px 0;border-top:1px solid var(--border)}
+.real-bio strong{color:var(--white)}
+.real-highlights{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.real-h{width:36px;height:36px;border-radius:50%;background:var(--ig);padding:2px}
+.real-h-inner{width:100%;height:100%;border-radius:50%;background:var(--ink-2);display:flex;align-items:center;justify-content:center;font-size:13px}
 
-  /* ── Cards grid ── */
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 1.5rem; margin-top: 2rem; }
-  .info-card { padding: 2rem; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; transition: border-color 0.3s, transform 0.3s; }
-  .info-card:hover { border-color: rgba(124,58,237,0.25); transform: translateY(-2px); }
-  .info-card .card-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(124,58,237,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1rem; }
-  .info-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .info-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+.real-info h3{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.6rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:18px;color:var(--white)}
+.real-info p{font-size:15px;color:var(--gray);line-height:1.65;margin-bottom:20px}
+.real-info .data-list{list-style:none;padding:0;margin:24px 0 0}
+.real-info .data-list li{padding:14px 0;display:flex;align-items:flex-start;gap:14px;font-size:14px;color:var(--gray);border-top:1px solid var(--border)}
+.real-info .data-list li:last-child{border-bottom:1px solid var(--border)}
+.real-info .data-list li .k{flex:0 0 140px;color:var(--white);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.real-info .data-list li .v{flex:1}
 
-  /* ── Roles table ── */
-  .roles-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-  .roles-table th { text-align: left; padding: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--purple-light); border-bottom: 1px solid rgba(124,58,237,0.2); font-weight: 600; }
-  .roles-table td { padding: 0.85rem 1rem; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-muted); }
-  .roles-table tr:hover td { color: var(--text); }
-  .role-badge { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-  .role-badge.duena { background: rgba(124,58,237,0.15); color: var(--purple-light); }
-  .role-badge.ejecutivo { background: rgba(59,130,246,0.15); color: #60A5FA; }
-  .role-badge.freelance { background: rgba(212,165,116,0.15); color: var(--gold-light); }
-  .role-badge.cliente { background: rgba(34,197,94,0.15); color: #4ADE80; }
+/* PRICING · compact horizontal scroll cards (Apple-style stories) */
+.phases-wrap{margin:48px -24px 0;position:relative}
+.phases{
+  display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:14px 24px 32px;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.phases::-webkit-scrollbar{display:none}
+.phase{
+  flex:0 0 240px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(0,0,0,.08);border-radius:20px;
+  padding:22px 20px;position:relative;transition:transform .3s,border-color .3s,box-shadow .3s;
+  scroll-snap-align:start;overflow:hidden;
+}
+section.bleed-light .phase{background:var(--white);border-color:rgba(0,0,0,.08);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.phase:hover{transform:translateY(-4px);border-color:rgba(254,44,85,.40);box-shadow:0 18px 40px -16px rgba(214,41,118,.20)}
+.phase.featured{background:linear-gradient(180deg,rgba(254,44,85,.06) 0%,var(--white) 60%);border-color:rgba(254,44,85,.30)}
+.phase.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ig)}
+.phase-tag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;background:rgba(0,0,0,.06);color:var(--gray-2);margin-bottom:10px;border-radius:99px}
+.phase.featured .phase-tag{background:var(--ig);color:var(--white)}
+.phase h3{font-family:var(--font-display);font-size:1.15rem;font-weight:800;color:var(--ink);margin-bottom:4px;letter-spacing:-.015em;line-height:1.2}
+.phase .phase-time{font-size:10px;color:var(--gray-2);letter-spacing:.04em;margin-bottom:12px;font-weight:600}
+.phase .phase-price{display:flex;align-items:baseline;gap:6px;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid rgba(0,0,0,.08)}
+.phase .phase-price .clp{font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--ink);letter-spacing:-.025em;line-height:1}
+.phase .phase-price .unit{font-size:10px;color:var(--gray-2);letter-spacing:.04em}
+.phase ul{list-style:none;padding:0;margin:0}
+.phase ul li{padding:5px 0 5px 18px;position:relative;font-size:11.5px;color:var(--gray-2);line-height:1.5}
+.phase ul li::before{content:'';position:absolute;left:0;top:11px;width:10px;height:1px;background:var(--ig-3)}
+.phase .phase-note{margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,0,0,.06);font-size:10px;color:var(--gray-2);line-height:1.5}
 
-  /* ── Tech grid ── */
-  .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px,1fr)); gap: 1rem; margin-top: 1.5rem; }
-  .tech-item { padding: 1.25rem; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; text-align: center; transition: border-color 0.3s; }
-  .tech-item:hover { border-color: rgba(124,58,237,0.25); }
-  .tech-item .tech-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
-  .tech-item .tech-desc { font-size: 0.75rem; color: var(--text-muted); }
+/* Phases dark variant when in bleed dark */
+section.bleed:not(.bleed-light) .phase{background:rgba(255,255,255,.04);border-color:var(--border)}
+section.bleed:not(.bleed-light) .phase h3{color:var(--white)}
+section.bleed:not(.bleed-light) .phase .phase-price .clp{color:var(--white)}
+section.bleed:not(.bleed-light) .phase ul li{color:var(--gray)}
+section.bleed:not(.bleed-light) .phase .phase-note{color:var(--gray-2);border-top-color:var(--border)}
+section.bleed:not(.bleed-light) .phase-tag{background:rgba(255,255,255,.08);color:var(--gray)}
 
-  /* ── Pipeline steps ── */
-  .pipeline-steps { display: flex; margin: 2rem 0; }
-  .pip-step { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); padding: 1rem 0.75rem; position: relative; text-align: center; }
-  .pip-step:first-child { border-radius: 12px 0 0 12px; }
-  .pip-step:last-child { border-radius: 0 12px 12px 0; }
-  .pip-step:not(:last-child) { border-right: none; }
-  .pip-step:not(:last-child)::after { content: '›'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); color: var(--purple-light); font-size: 1.3rem; z-index: 1; background: var(--bg); padding: 0 2px; }
-  .pip-num { font-size: 0.65rem; font-weight: 700; color: var(--purple-light); text-transform: uppercase; letter-spacing: 0.08em; }
-  .pip-name { font-size: 0.875rem; font-weight: 600; margin-top: 0.25rem; line-height: 1.3; }
-  .pip-actor { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; }
+/* mask edges for swipe affordance */
+.phases-wrap::after{content:'';position:absolute;top:0;right:0;width:60px;height:100%;background:linear-gradient(90deg,transparent 0%,var(--bone) 100%);pointer-events:none}
+section.bleed:not(.bleed-light) .phases-wrap::after{background:linear-gradient(90deg,transparent 0%,var(--ink) 100%)}
 
-  /* ── Roadmap ── */
-  .roadmap { position: relative; padding-left: 2rem; margin-top: 2rem; }
-  .roadmap::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--purple), var(--gold), rgba(255,255,255,0.05)); }
-  .roadmap-item { position: relative; padding: 1.25rem 0 1.25rem 1.5rem; }
-  .roadmap-item::before { content: ''; position: absolute; left: -2rem; top: 1.6rem; width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--purple); background: var(--bg); }
-  .roadmap-item.done::before { background: var(--purple); box-shadow: 0 0 10px rgba(124,58,237,0.4); }
-  .roadmap-item.current::before { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 10px rgba(212,165,116,0.4); }
-  .roadmap-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-  .roadmap-item p { font-size: 0.85rem; color: var(--text-muted); }
-  .roadmap-item .phase-tag { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; }
-  .phase-tag.live { background: rgba(34,197,94,0.15); color: #4ADE80; }
-  .phase-tag.next { background: rgba(251,191,36,0.15); color: #FCD34D; }
-  .phase-tag.planned { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+@media (min-width:1200px){
+  .phases{justify-content:flex-start;flex-wrap:wrap;overflow-x:visible;padding:14px 24px 32px}
+  .phase{flex:0 0 calc(33.333% - 10px)}
+  .phases-wrap::after{display:none}
+}
 
-  /* ── Pricing ── */
-  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-top: 2rem; }
-  .price-card { padding: 2rem; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; position: relative; transition: transform 0.3s, border-color 0.3s; }
-  .price-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.3); }
-  .price-card.featured { border-color: rgba(124,58,237,0.4); background: linear-gradient(135deg, rgba(124,58,237,0.08), var(--bg-card)); }
-  .price-card .featured-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.7rem; font-weight: 700; background: var(--gradient-accent); color: #fff; white-space: nowrap; }
-  .price-card .price-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--purple-light); font-weight: 600; margin-bottom: 0.5rem; }
-  .price-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .price-num { font-size: 3rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
-  .price-unit { font-size: 0.9rem; color: var(--text-muted); }
-  .price-card ul { list-style: none; margin-top: 1.5rem; }
-  .price-card ul li { font-size: 0.875rem; color: var(--text-muted); padding: 0.4rem 0; display: flex; align-items: flex-start; gap: 0.6rem; }
-  .price-card ul li::before { content: '✓'; color: var(--purple-light); font-weight: 700; flex-shrink: 0; }
-  .price-card .price-note { margin-top: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.25); font-style: italic; }
+.total-band{margin-top:48px;padding:40px;background:var(--ig);border-radius:24px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;color:var(--white)}
+.total-band .tb-label{font-size:11px;font-weight:800;letter-spacing:.20em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+.total-band .tb-num{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.6rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.total-band .tb-sub{font-size:13px;opacity:.9;margin-top:4px;font-weight:500}
 
-  /* ── Footer ── */
-  footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 4rem; }
-  footer .brand { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-  footer p { font-size: 0.85rem; color: var(--text-muted); }
-  footer a { color: var(--purple-light); text-decoration: none; }
+/* TECH GRID */
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:48px}
+.tech-card{background:var(--ink-2);border:1px solid var(--border);border-radius:16px;padding:22px 20px;transition:border-color .25s,transform .25s}
+.tech-card:hover{border-color:var(--border-2);transform:translateY(-2px)}
+.tech-card .tech-icon{font-size:22px;margin-bottom:10px;line-height:1}
+.tech-card .tech-name{font-size:14px;font-weight:800;color:var(--white);margin-bottom:6px;letter-spacing:-.005em}
+.tech-card .tech-desc{font-size:11.5px;color:var(--gray);line-height:1.5}
 
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    section { padding: 4rem 1.25rem; }
-    .feature-block { grid-template-columns: 1fr; gap: 2rem; }
-    .feature-block.reverse { direction: ltr; }
-    .hero .client-info { flex-direction: column; gap: 1.5rem; align-items: center; }
-    nav .nav-links { display: none; }
-    .roles-table { font-size: 0.8rem; }
-    .pipeline-steps { flex-wrap: wrap; }
-    .pip-step { flex: 1 1 40%; border-radius: 10px !important; border: 1px solid rgba(255,255,255,0.06) !important; }
-    .pip-step::after { display: none; }
-    .pricing-grid { grid-template-columns: 1fr; }
-  }
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:48px}
+.team-card{background:var(--ink-2);border:1px solid var(--border);border-radius:24px;padding:32px 28px;text-align:center;transition:border-color .3s,transform .3s}
+.team-card:hover{border-color:var(--border-2);transform:translateY(-4px)}
+.team-avatar{width:72px;height:72px;border-radius:50%;background:var(--ig);padding:3px;margin:0 auto 16px}
+.team-avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--ink-3);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:900;font-size:28px;font-family:var(--font-display)}
+.team-card h4{font-size:18px;font-weight:800;color:var(--white);margin-bottom:4px}
+.team-card .team-role{font-size:11px;color:var(--ig-3);letter-spacing:.10em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.team-card .team-bio{font-size:13px;color:var(--gray);line-height:1.55}
 
-  /* ── Animations ── */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-  .animate { opacity: 0; animation: fadeUp 0.6s ease-out forwards; }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
-  .delay-4 { animation-delay: 0.4s; }
+/* CTA FINAL · gradient bleed */
+.cta-band{padding:120px 24px;text-align:center;background:var(--ig);position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.65'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");opacity:.05;mix-blend-mode:overlay;pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;color:var(--white)}
+.cta-inner h2{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:24px}
+.cta-inner p{font-size:clamp(1rem,1.4vw,1.2rem);opacity:.92;margin-bottom:36px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 36px;background:var(--white);color:var(--ig-4);border-radius:99px;font-weight:800;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .25s}
+.cta-btn:hover{transform:scale(1.04);box-shadow:0 20px 60px rgba(0,0,0,.30)}
+.cta-heart{display:inline-block;animation:heartPulse 1.4s infinite}
+@keyframes heartPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+
+/* FOOTER */
+footer{padding:60px 24px 40px;text-align:center;border-top:1px solid var(--border);background:var(--ink)}
+footer .f-brand{font-family:var(--font-display);font-style:italic;font-size:24px;font-weight:800;margin-bottom:14px;background:var(--ig);-webkit-background-clip:text;background-clip:text;color:transparent}
+footer .f-links{display:flex;gap:24px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+footer .f-links a{font-size:13px;color:var(--gray);text-decoration:none;transition:color .2s}
+footer .f-links a:hover{color:var(--white)}
+footer p{font-size:11px;color:var(--gray-2);letter-spacing:.04em}
+
+/* FLOATING WHATSAPP BUTTON */
+.wa-fab{
+  position:fixed;bottom:24px;right:24px;z-index:250;
+  width:60px;height:60px;border-radius:50%;background:var(--wa);
+  display:flex;align-items:center;justify-content:center;text-decoration:none;
+  box-shadow:0 14px 36px rgba(37,211,102,.45),0 4px 12px rgba(0,0,0,.30);
+  transition:transform .25s;color:var(--white);font-size:28px;
+}
+.wa-fab:hover{transform:scale(1.08) rotate(6deg)}
+.wa-fab::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--wa);animation:wapulse 2s infinite;opacity:.6}
+@keyframes wapulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
+
+/* DOUBLE TAP HEART · floating */
+.dt-heart{
+  position:fixed;pointer-events:none;z-index:299;font-size:80px;
+  transform:translate(-50%,-50%) scale(0);
+  filter:drop-shadow(0 4px 20px rgba(254,44,85,.6));
+}
+.dt-heart.show{animation:dtHeart .9s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes dtHeart{
+  0%{transform:translate(-50%,-50%) scale(0) rotate(-12deg);opacity:0}
+  30%{transform:translate(-50%,-50%) scale(1.3) rotate(0deg);opacity:1}
+  100%{transform:translate(-50%,-50%) scale(.6) rotate(8deg) translateY(-60px);opacity:0}
+}
+
+/* REELS-STYLE CAROUSEL CARDS */
+.reels-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:32px 24px 40px;margin:24px -24px 0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.reels-track::-webkit-scrollbar{display:none}
+.reel{flex:0 0 auto;width:min(280px,72vw);aspect-ratio:9/16;border-radius:24px;background:var(--ink-2);position:relative;overflow:hidden;scroll-snap-align:center;transition:transform .3s}
+.reel:hover{transform:scale(1.02)}
+.reel-1{background:linear-gradient(135deg,#feda75 0%,#fa7e1e 100%)}
+.reel-2{background:linear-gradient(135deg,#d62976 0%,#962fbf 100%)}
+.reel-3{background:linear-gradient(135deg,#962fbf 0%,#4f5bd5 100%)}
+.reel-4{background:linear-gradient(135deg,#25f4ee 0%,#fe2c55 100%)}
+.reel-5{background:linear-gradient(135deg,#feda75 0%,#d62976 50%,#962fbf 100%)}
+.reel-content{position:absolute;inset:0;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;color:var(--white)}
+.reel-content .r-eyebrow{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;opacity:.85;margin-bottom:8px}
+.reel-content h4{font-family:var(--font-display);font-size:1.4rem;font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em}
+.reel-content p{font-size:12.5px;opacity:.85;line-height:1.5}
+.reel-actions{position:absolute;right:14px;bottom:90px;display:flex;flex-direction:column;gap:18px;align-items:center}
+.reel-action{display:flex;flex-direction:column;align-items:center;color:var(--white);font-size:10px;font-weight:600;gap:4px}
+.reel-action svg{width:28px;height:28px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+
+/* REVEAL ON SCROLL */
+[data-r]{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+[data-r].in{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+  .nav{top:8px;height:54px}
+  .nav-links{display:none}
+  .real-data{grid-template-columns:1fr;gap:32px}
+  .real-phone{margin:0 auto;justify-self:center}
+  .phases{grid-template-columns:1fr}
+  section.bleed{padding:72px 0}
+  .hero{padding:88px 20px 40px;min-height:auto}
+  .hero-phone{width:min(240px,70vw)}
+}
+@media (max-width:480px){
+  .container{padding:0 16px}
+  .nav-inner{padding:0 16px}
+  .nav-name{font-size:13px}
+  .nav-cta{font-size:10px;padding:7px 12px}
+  .hero-eyebrow{font-size:10px;padding:6px 14px}
+  .total-band{padding:24px;flex-direction:column;align-items:flex-start}
+  .wa-fab{width:52px;height:52px;font-size:24px;bottom:16px;right:16px}
+}
+@media (hover:none){[data-r]{opacity:1;transform:none}}
+
+/* ════════════════════════════════════════════════════
+   MOTION SIGNATURE · RedesSociales.cl · vertical IG/TikTok
+   15 efectos únicos del nicho redes sociales
+   ════════════════════════════════════════════════════ */
+
+/* M1 · NOTIFICATION DOT · sobre logo nav (IG inbox style) */
+.nav-avatar::after{
+  content:'';position:absolute;top:0;right:0;width:10px;height:10px;
+  background:var(--tt-pink);border:2px solid var(--ink);border-radius:50%;
+  animation:notifPulse 2s infinite;z-index:2;
+}
+.nav-avatar{position:relative}
+@keyframes notifPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(254,44,85,.6)}50%{transform:scale(1.15);box-shadow:0 0 0 8px rgba(254,44,85,0)}}
+
+/* M2 · AVATAR RING IG GRADIENT rotando */
+.nav-avatar,.real-avatar,.team-avatar{position:relative}
+.nav-avatar::before,.real-avatar::before,.team-avatar::before{
+  content:'';position:absolute;inset:-2px;border-radius:50%;
+  background:conic-gradient(from 0deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75);
+  z-index:-1;animation:ringSpin 8s linear infinite;
+}
+@keyframes ringSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+
+/* M3 · LIKE COUNTER · +1 flotante al hover en CTAs */
+.like-burst{position:absolute;pointer-events:none;color:var(--tt-pink);font-weight:900;font-size:14px;opacity:0;transform:translateY(0);text-shadow:0 2px 8px rgba(254,44,85,.4)}
+.like-burst.go{animation:likeBurst 1.1s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes likeBurst{
+  0%{opacity:0;transform:translate(-50%,0) scale(.7)}
+  20%{opacity:1;transform:translate(-50%,-12px) scale(1.2)}
+  100%{opacity:0;transform:translate(-50%,-50px) scale(1)}
+}
+
+/* M4 · FOLLOW BUTTON · cambia estado "Seguir → Siguiendo ✓" */
+.follow-btn{padding:6px 16px;font-size:11px;font-weight:700;background:var(--ig);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:6px}
+.follow-btn.following{background:rgba(255,255,255,.10);color:var(--white)}
+.follow-btn.following::before{content:'✓ ';font-weight:800}
+
+/* M5 · SOUND TOGGLE · TikTok-style flotante */
+.sound-toggle{
+  position:fixed;bottom:96px;right:24px;z-index:240;
+  width:44px;height:44px;border-radius:50%;background:rgba(10,10,10,.85);
+  border:1px solid var(--border-2);color:var(--white);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(8px);
+  transition:transform .2s,background .2s;
+}
+.sound-toggle:hover{background:var(--tt-pink);transform:scale(1.1)}
+@media (max-width:480px){.sound-toggle{bottom:84px;right:16px;width:40px;height:40px}}
+
+/* M6 · TRENDING SPARKLINE · ↑ que sube al hover de cifras */
+.trend-arrow{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--wa);font-weight:700;margin-left:8px}
+.trend-arrow svg{width:14px;height:14px;animation:trendUp 2s ease-in-out infinite}
+@keyframes trendUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* M7 · ENGAGEMENT COUNTER rotating */
+.counter-roll{display:inline-block;overflow:hidden;height:1.2em;vertical-align:bottom}
+.counter-roll-inner{display:flex;flex-direction:column;animation:rollUp 4s ease-in-out infinite}
+@keyframes rollUp{
+  0%,18%{transform:translateY(0)}
+  20%,38%{transform:translateY(-1.2em)}
+  40%,58%{transform:translateY(-2.4em)}
+  60%,78%{transform:translateY(-3.6em)}
+  80%,98%{transform:translateY(-4.8em)}
+  100%{transform:translateY(0)}
+}
+
+/* M8 · STORY VIEW SHIMMER · línea brillante que cruza al revelar sección */
+section.bleed::after{
+  content:'';position:absolute;top:0;left:-100%;width:120%;height:2px;
+  background:linear-gradient(90deg,transparent 0%,var(--tt-cyan) 30%,var(--tt-pink) 70%,transparent 100%);
+  z-index:5;pointer-events:none;opacity:0;
+}
+section.bleed.viewed::after{animation:storySweep 1.4s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes storySweep{0%{left:-100%;opacity:0}20%{opacity:1}100%{left:100%;opacity:0}}
+
+/* M9 · DM BADGE · con número creciente */
+.dm-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--tt-pink);color:#fff;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.04em;animation:dmShake 6s infinite}
+@keyframes dmShake{0%,90%,100%{transform:rotate(0)}92%{transform:rotate(-8deg)}94%{transform:rotate(8deg)}96%{transform:rotate(-4deg)}98%{transform:rotate(0)}}
+
+/* M10 · FILTER SWAP · phone screen alterna gradients (IG filter cycling) */
+.hero-phone-screen{animation:filterSwap 12s ease-in-out infinite}
+@keyframes filterSwap{
+  0%,100%{background:linear-gradient(180deg,#feda75 0%,#fa7e1e 20%,#d62976 50%,#962fbf 80%,#4f5bd5 100%)}
+  25%{background:linear-gradient(180deg,#25f4ee 0%,#fe2c55 100%)}
+  50%{background:linear-gradient(180deg,#962fbf 0%,#4f5bd5 50%,#25f4ee 100%)}
+  75%{background:linear-gradient(180deg,#fa7e1e 0%,#fe2c55 50%,#962fbf 100%)}
+}
+
+/* M11 · COMMENT RIPPLE · ondas tipo bubble chat en cards */
+.tech-card,.phase,.team-card{position:relative;overflow:hidden}
+.bubble-ripple{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(254,44,85,.30) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:bubbleR .9s cubic-bezier(.22,1,.36,1)}
+@keyframes bubbleR{0%{transform:translate(-50%,-50%) scale(0);opacity:.9}100%{transform:translate(-50%,-50%) scale(6);opacity:0}}
+
+/* M12 · PROFILE ZOOM · efecto IG profile pic al hover */
+.real-avatar,.nav-avatar,.team-avatar{cursor:pointer;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.real-avatar:hover,.nav-avatar:hover,.team-avatar:hover{transform:scale(1.12) rotate(-3deg)}
+
+/* M13 · BOOST FLAME · TikTok-style fire icon en featured */
+.phase.featured::after{
+  content:'🔥';position:absolute;top:14px;right:14px;font-size:18px;
+  animation:flameFlicker 1.6s ease-in-out infinite;
+  filter:drop-shadow(0 0 8px rgba(254,44,85,.5));
+}
+@keyframes flameFlicker{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.15) rotate(3deg)}}
+
+/* M14 · FOR YOU SCROLL · sticky reels indicator */
+.fy-indicator{
+  position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:140;
+  display:flex;flex-direction:column;gap:10px;opacity:0;transition:opacity .4s;
+  pointer-events:none;
+}
+.fy-indicator.show{opacity:1;pointer-events:auto}
+.fy-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.30);transition:all .3s;cursor:pointer}
+.fy-dot.active{background:var(--tt-pink);width:6px;height:24px;border-radius:6px}
+@media (max-width:768px){.fy-indicator{display:none}}
+
+/* M15 · LIVE TAG · pulse rojo "EN VIVO" estilo IG Live */
+.live-tag{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 10px;
+  background:#fe2c55;color:#fff;border-radius:6px;font-size:10px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;
+  animation:livePulse 1.8s infinite;
+}
+.live-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff}
+@keyframes livePulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(254,44,85,.7)}
+  50%{box-shadow:0 0 0 10px rgba(254,44,85,0)}
+}
 </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-  <div class="logo">Smart Connection</div>
-  <ul class="nav-links">
-    <li><a href="#inicio">Inicio</a></li>
-    <li><a href="#plataforma">Plataforma</a></li>
-    <li><a href="#automatizaciones">Automatizaciones</a></li>
-    <li><a href="#usuarios">Usuarios</a></li>
-    <li><a href="#tecnologia">Tecnolog&iacute;a</a></li>
-    <li><a href="#inversion">Inversi&oacute;n</a></li>
-  </ul>
+<!-- STORY BARS (top progress · 5 stories) -->
+<div class="story-bars">
+  <div class="story-bar"><div class="fill" data-story="0"></div></div>
+  <div class="story-bar"><div class="fill" data-story="1"></div></div>
+  <div class="story-bar"><div class="fill" data-story="2"></div></div>
+  <div class="story-bar"><div class="fill" data-story="3"></div></div>
+  <div class="story-bar"><div class="fill" data-story="4"></div></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#hero">
+      <div class="nav-avatar"><div class="nav-avatar-inner">R</div></div>
+      <div class="nav-name">RedesSociales<span class="tld">.cl</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hoy">Tu situación</a></li>
+      <li><a href="#fases">Fases</a></li>
+      <li><a href="#tech">Tecnología</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+    </ul>
+    <a href="https://wa.link/ko8l4t" target="_blank" class="nav-cta">Hablemos →</a>
+  </div>
 </nav>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero" id="inicio">
-  <div class="badge animate">Propuesta de Plataforma &bull; Mayo 2026</div>
-  <h1 class="animate delay-1">Plataforma de<br><span>Operaci&oacute;n Digital</span></h1>
-  <p class="subtitle animate delay-2">
-    Sistema web dise&ntilde;ado a medida para <strong>Agencia Nathaly</strong>. Centraliza guiones, m&eacute;tricas, planificaci&oacute;n de contenido y finanzas por cliente &mdash; todo automatizado, todo visible desde una pantalla.
-  </p>
-  <div class="client-info animate delay-3">
-    <div class="stat">
-      <div class="stat-number">8h</div>
-      <div class="stat-label">&rarr; menos de 1h<br>Reportes semanales</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">3&ndash;5d</div>
-      <div class="stat-label">&rarr; menos de 24h<br>Brief a gui&oacute;n</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">~20%</div>
-      <div class="stat-label">&rarr; menos de 5%<br>Cuentas inactivas</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">6w</div>
-      <div class="stat-label">Primera versi&oacute;n<br>en producci&oacute;n</div>
-    </div>
-  </div>
-</section>
+<main>
 
-<!-- ═══════════ PLATAFORMA ═══════════ -->
-<section id="plataforma">
-  <span class="section-label">Vista Central</span>
-  <h2>Un solo lugar para toda la agencia</h2>
-  <p class="section-desc">
-    Dashboard operativo en tiempo real: estado de cuentas, alertas de publicaci&oacute;n, tareas del d&iacute;a y m&eacute;tricas del mes. Todo visible en los primeros 10 segundos.
-  </p>
-
-  <div class="feature-block">
-    <div class="feature-text">
-      <h3>Dashboard por cliente</h3>
-      <p>Vista consolidada de todas las cuentas activas. Cada cliente tiene su tarjeta con sem&aacute;foro de estado, fecha de &uacute;ltima publicaci&oacute;n y alerta si lleva m&aacute;s de 5 d&iacute;as sin contenido.</p>
-      <ul>
-        <li>Sem&aacute;foro verde / amarillo / rojo por cuenta</li>
-        <li>Alerta autom&aacute;tica si cuenta inactiva +5 d&iacute;as</li>
-        <li>M&eacute;tricas del mes al lado del nombre del cliente</li>
-        <li>Acceso r&aacute;pido al calendario editorial</li>
-        <li>Vista de carga de trabajo por ejecutivo</li>
-      </ul>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span><span>Propuesta · Plataforma SaaS RedesSociales.cl</span></div>
+    <h1>Tu agencia.<br>En <span class="ig-text">una sola</span> pantalla.</h1>
+    <p class="lead">
+      Plataforma SaaS para que Nathaly Varela escale de freelance @redessociales.cl_ a agencia con dashboard único · guiones IA en 24h · sync Meta · TikTok · YouTube · WhatsApp Business.
+    </p>
+    <div class="hero-actions">
+      <a href="#fases" class="btn-primary">Ver las 5 fases →</a>
+      <a href="#hoy" class="btn-secondary">Tu situación hoy</a>
     </div>
-    <div class="feature-img">
-      <div class="mock-chrome">
-        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
-        <div class="mock-url">app.agencianathaly.cl/dashboard</div>
-      </div>
-      <div class="mock-body">
-        <div class="mock-row">
-          <div class="mock-card-sm"><div class="mc-num">12</div><div class="mc-label">Clientes activos</div></div>
-          <div class="mock-card-sm"><div class="mc-num">3</div><div class="mc-label">Alertas hoy</div></div>
-          <div class="mock-card-sm"><div class="mc-num">8</div><div class="mc-label">Gui&oacute;nes pendientes</div></div>
-        </div>
-        <div class="mock-list-item"><span>RestaurAnte Bellavista</span><span class="mock-pill ok">Al d&iacute;a</span></div>
-        <div class="mock-list-item"><span>Cl&iacute;nica Derma Sur</span><span class="mock-pill warn">Hace 4 d&iacute;as</span></div>
-        <div class="mock-list-item"><span>Inmobiliaria Torres</span><span class="mock-pill danger">7 d&iacute;as sin publicar</span></div>
-        <div class="mock-list-item"><span>Gym FitZone</span><span class="mock-pill ok">Al d&iacute;a</span></div>
-        <div class="mock-list-item"><span>Caf&eacute; Origen</span><span class="mock-pill ok">Al d&iacute;a</span></div>
-      </div>
-      <div class="img-label">Dashboard &middot; Estado de Cuentas</div>
-    </div>
-  </div>
-
-  <div class="feature-block reverse">
-    <div class="feature-text">
-      <h3>Acceso con rol personalizado</h3>
-      <p>Cada persona del equipo ve exactamente lo que le corresponde. La due&ntilde;a ve todo. Los ejecutivos ven sus cuentas. Los clientes solo ven su informaci&oacute;n.</p>
-      <ul>
-        <li>Acceso con email, sin contrase&ntilde;as</li>
-        <li>Redirecci&oacute;n autom&aacute;tica seg&uacute;n rol</li>
-        <li>Portal separado para clientes externos</li>
-        <li>Registro de &uacute;ltimo acceso por usuario</li>
-      </ul>
-    </div>
-    <div class="feature-img">
-      <div class="mock-chrome">
-        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
-        <div class="mock-url">app.agencianathaly.cl/login</div>
-      </div>
-      <div class="mock-body" style="text-align:center;padding:32px 24px">
-        <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,#7C3AED,#D4A574);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:22px">Agencia Nathaly</div>
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.3);text-align:left;margin-bottom:10px">nathaly@agencianathaly.cl</div>
-        <div style="background:linear-gradient(135deg,#7C3AED,#D4A574);border-radius:8px;padding:11px;font-size:11px;font-weight:700;color:white">Ingresar con email &rarr;</div>
-        <div style="margin-top:16px;font-size:9px;color:rgba(255,255,255,0.2)">Solo emails autorizados tienen acceso</div>
-      </div>
-      <div class="img-label">Autenticaci&oacute;n &middot; Sin contrase&ntilde;as</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ AUTOMATIZACIONES: GUIONES ═══════════ -->
-<section id="automatizaciones">
-  <span class="section-label">IA Generativa</span>
-  <h2>De brief a gui&oacute;n<br>en menos de 24 horas</h2>
-  <p class="section-desc">
-    El cliente env&iacute;a el brief. La plataforma genera el borrador con Groq&nbsp;+&nbsp;Claude. El ejecutivo ajusta. El cliente aprueba dentro del sistema &mdash; sin WhatsApp, sin correos perdidos.
-  </p>
-
-  <div class="pipeline-steps">
-    <div class="pip-step"><div class="pip-num">01</div><div class="pip-name">Brief del cliente</div><div class="pip-actor">Cliente / Ejecutivo</div></div>
-    <div class="pip-step"><div class="pip-num">02</div><div class="pip-name">IA genera borrador</div><div class="pip-actor">Groq + Claude</div></div>
-    <div class="pip-step"><div class="pip-num">03</div><div class="pip-name">Revisi&oacute;n creativa</div><div class="pip-actor">Ejecutivo de cuenta</div></div>
-    <div class="pip-step"><div class="pip-num">04</div><div class="pip-name">Aprobaci&oacute;n</div><div class="pip-actor">Cliente (portal propio)</div></div>
-    <div class="pip-step"><div class="pip-num">05</div><div class="pip-name">Archivo + historial</div><div class="pip-actor">Sistema autom&aacute;tico</div></div>
-  </div>
-
-  <div class="feature-block" style="margin-top:2rem">
-    <div class="feature-text">
-      <h3>Gui&oacute;nes generados con contexto de marca</h3>
-      <p>Cada cliente tiene un perfil: tono, palabras clave, formatos preferidos y ejemplos aprobados anteriores. La IA usa ese contexto para generar un borrador que ya suena a la marca.</p>
-      <ul>
-        <li>Perfil de marca por cliente (tono, keywords, formato)</li>
-        <li>Generaci&oacute;n con historial de gui&oacute;nes aprobados</li>
-        <li>Plantillas por tipo: Reels, Stories, Carrusel, TikTok</li>
-        <li>Aprobaci&oacute;n con un click &mdash; no por WhatsApp</li>
-        <li>Versiones guardadas con qui&eacute;n aprob&oacute; y cu&aacute;ndo</li>
-      </ul>
-    </div>
-    <div class="feature-img">
-      <div class="mock-chrome">
-        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
-        <div class="mock-url">app.agencianathaly.cl/guiones/nuevo</div>
-      </div>
-      <div class="mock-body">
-        <div style="font-size:10px;color:var(--text-muted);margin-bottom:8px">Cliente: <strong style="color:var(--text)">RestaurAnte Bellavista</strong> &nbsp;&middot;&nbsp; <span class="mock-tag">Reels 30s</span></div>
-        <div style="font-size:9px;color:var(--text-muted);margin-bottom:4px">Brief:</div>
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:8px;font-size:9px;color:var(--text-muted);margin-bottom:10px">"Mostrar nueva carta de verano, destacar el ceviche. Tono fresco, joven."</div>
-        <div style="font-size:9px;color:var(--purple-light);margin-bottom:6px;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block"></span> Generando con contexto de marca...</div>
-        <div class="mock-textarea">🎬 Hook: "¿Sabías que hay un lugar donde el verano sabe a ceviche?"
-
-📍 Escena 1 (3s): Close-up del ceviche llegando a la mesa...
-🎵 Música: Lo-fi tropical, BPM 95
-✍️ CTA: "Reserva en el bio →"</div>
-        <div class="mock-btn">✨ Aprobar gui&oacute;n</div>
-      </div>
-      <div class="img-label">M&oacute;dulo de Gui&oacute;nes &middot; IA Generativa</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ MÉTRICAS ═══════════ -->
-<section>
-  <span class="section-label">Sincronizaci&oacute;n Autom&aacute;tica</span>
-  <h2>Reportes que se generan solos</h2>
-  <p class="section-desc">
-    Conectado con Meta Graph API, TikTok Business API y YouTube Data API. Las m&eacute;tricas se sincronizan cada 24 horas &mdash; sin bajar Excel, sin copiar y pegar.
-  </p>
-
-  <div class="feature-block reverse">
-    <div class="feature-text">
-      <h3>M&eacute;tricas de todas las redes en un lugar</h3>
-      <p>El reporte del lunes deja de existir como tarea manual. La plataforma ya tiene los n&uacute;meros listos: alcance, impresiones, engagement, seguidores nuevos &mdash; por cliente, por red, por per&iacute;odo.</p>
-      <ul>
-        <li>Meta (Instagram + Facebook): alcance, engagement, seguidores</li>
-        <li>TikTok: vistas, shares, engagement por video</li>
-        <li>YouTube: reproducciones, retenci&oacute;n, suscriptores</li>
-        <li>Comparativa: esta semana vs semana anterior</li>
-        <li>Exportar PDF del reporte con un click</li>
-      </ul>
-    </div>
-    <div class="feature-img">
-      <div class="mock-chrome">
-        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
-        <div class="mock-url">app.agencianathaly.cl/metricas/gym-fitzone</div>
-      </div>
-      <div class="mock-body">
-        <div style="font-size:10px;font-weight:600;margin-bottom:8px">Gym FitZone &middot; <span style="color:var(--text-muted);font-weight:400">Mayo 2026</span></div>
-        <div class="mock-row">
-          <div class="mock-card-sm"><div class="mc-num" style="font-size:1rem">42.3K</div><div class="mc-label">Alcance / mes</div><div style="font-size:8px;color:#4ADE80;margin-top:3px">↑ +18% vs mes ant.</div></div>
-          <div class="mock-card-sm"><div class="mc-num" style="font-size:1rem">6.8%</div><div class="mc-label">Engagement</div><div style="font-size:8px;color:#4ADE80;margin-top:3px">↑ +1.2pp</div></div>
-        </div>
-        <div class="mock-chart-bar">
-          <div class="mock-bar-col" style="height:45%"></div>
-          <div class="mock-bar-col" style="height:60%"></div>
-          <div class="mock-bar-col hi" style="height:80%"></div>
-          <div class="mock-bar-col" style="height:55%"></div>
-          <div class="mock-bar-col gold" style="height:90%"></div>
-          <div class="mock-bar-col" style="height:70%"></div>
-          <div class="mock-bar-col hi" style="height:85%"></div>
-        </div>
-        <div style="font-size:8px;color:var(--text-muted);margin-top:4px;display:flex;justify-content:space-between"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
-      </div>
-      <div class="img-label">M&eacute;tricas &middot; Sincronizaci&oacute;n API</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ CALENDARIO ═══════════ -->
-<section>
-  <span class="section-label">Planificaci&oacute;n Editorial</span>
-  <h2>El contenido de toda la agencia en un calendario</h2>
-  <p class="section-desc">
-    Vista mensual por cliente con arrastrar y soltar. Alertas cuando hay brechas de contenido. La due&ntilde;a ve toda la agencia; cada ejecutivo ve sus cuentas.
-  </p>
-
-  <div class="feature-block">
-    <div class="feature-text">
-      <h3>Planificaci&oacute;n visual por cuenta</h3>
-      <p>Cada cuenta tiene su calendario con posts programados, en revisi&oacute;n y publicados. Arrastra para reprogramar. El sistema alerta cuando una cuenta lleva m&aacute;s de 5 d&iacute;as sin contenido agendado.</p>
-      <ul>
-        <li>Vista mensual y semanal por cuenta</li>
-        <li>Drag &amp; drop para reprogramar</li>
-        <li>Alerta autom&aacute;tica si hay brecha de +5 d&iacute;as</li>
-        <li>Estados: borrador / en revisi&oacute;n / aprobado / publicado</li>
-        <li>Vista de carga de trabajo por ejecutivo</li>
-      </ul>
-    </div>
-    <div class="feature-img">
-      <div class="mock-chrome">
-        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
-        <div class="mock-url">app.agencianathaly.cl/calendario</div>
-      </div>
-      <div class="mock-body">
-        <div style="font-size:10px;font-weight:600;margin-bottom:6px">Mayo 2026 &middot; <span style="color:var(--text-muted);font-weight:400">Cl&iacute;nica Derma Sur</span></div>
-        <div style="font-size:8px;color:var(--text-muted);display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px;text-align:center"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
-        <div class="mock-cal-grid">
-          <div class="mock-cal-day"></div><div class="mock-cal-day">1</div>
-          <div class="mock-cal-day has">2</div><div class="mock-cal-day">3</div>
-          <div class="mock-cal-day has">4</div><div class="mock-cal-day">5</div>
-          <div class="mock-cal-day">6</div><div class="mock-cal-day has">7</div>
-          <div class="mock-cal-day">8</div><div class="mock-cal-day has">9</div>
-          <div class="mock-cal-day">10</div><div class="mock-cal-day">11</div>
-          <div class="mock-cal-day gap">12</div><div class="mock-cal-day gap">13</div>
-          <div class="mock-cal-day has">14</div><div class="mock-cal-day">15</div>
-          <div class="mock-cal-day has">16</div><div class="mock-cal-day">17</div>
-          <div class="mock-cal-day has">18</div><div class="mock-cal-day">19</div>
-          <div class="mock-cal-day">20</div>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:8px;align-items:center">
-          <div style="width:8px;height:8px;border-radius:2px;background:rgba(124,58,237,0.3)"></div><span style="font-size:8px;color:var(--text-muted)">Publicado</span>
-          <div style="width:8px;height:8px;border-radius:2px;background:rgba(239,68,68,0.2)"></div><span style="font-size:8px;color:var(--text-muted)">Brecha detectada</span>
+    <div class="hero-phone">
+      <div class="hero-phone-screen">
+        <div class="ps-label">@redessociales.cl_</div>
+        <div class="ps-num">2.671</div>
+        <div class="ps-sub">followers reales</div>
+        <div class="ps-bars">
+          <span class="ps-bar"></span><span class="ps-bar"></span><span class="ps-bar"></span>
+          <span class="ps-bar"></span><span class="ps-bar"></span><span class="ps-bar"></span>
+          <span class="ps-bar"></span>
         </div>
       </div>
-      <div class="img-label">Calendario &middot; Vista Editorial</div>
     </div>
-  </div>
-
-  <div class="cards-grid" style="margin-top:0">
-    <div class="info-card"><div class="card-icon">💰</div><h4>Margen por cliente</h4><p>Cuánto factura vs cuánto cuesta atenderlo. Detecta las cuentas que consumen más recursos de los que generan.</p></div>
-    <div class="info-card"><div class="card-icon">⏱️</div><h4>Horas por cuenta</h4><p>El equipo registra tiempo por cliente. Al final del mes sabes cuántas horas dedicaste a cada cuenta.</p></div>
-    <div class="info-card"><div class="card-icon">📊</div><h4>Estado de cobranza</h4><p>Facturas emitidas, pendientes y vencidas por cliente. Alertas automáticas antes del vencimiento.</p></div>
-    <div class="info-card"><div class="card-icon">📄</div><h4>Reporte mensual auto</h4><p>El reporte financiero del mes se genera solo. Exportable en PDF para la dueña o el contador.</p></div>
   </div>
 </section>
 
-<!-- ═══════════ USUARIOS ═══════════ -->
-<section id="usuarios">
-  <span class="section-label">Administraci&oacute;n</span>
-  <h2>Gesti&oacute;n de Usuarios</h2>
-  <p class="section-desc">
-    Panel de administraci&oacute;n para gestionar accesos del equipo y clientes. Cada persona tiene un rol que determina exactamente qu&eacute; puede ver y hacer en la plataforma.
-  </p>
-
-  <div class="feature-block reverse">
-    <div class="feature-text">
-      <h3>Crear usuarios en un click</h3>
-      <p>El formulario permite definir nombre, email, rol y cuentas asignadas. El nuevo usuario puede acceder inmediatamente con su email.</p>
-      <ul>
-        <li>Cuatro roles: Due&ntilde;a, Ejecutivo, Freelance, Cliente</li>
-        <li>Asignaci&oacute;n de cuentas por ejecutivo</li>
-        <li>Activar / desactivar acceso al sistema</li>
-        <li>Registro de &uacute;ltimo acceso por usuario</li>
-        <li>Portal separado para clientes externos</li>
-      </ul>
-    </div>
-    <div class="feature-img">
-      <div class="mock-chrome">
-        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
-        <div class="mock-url">app.agencianathaly.cl/admin/usuarios</div>
-      </div>
-      <div class="mock-body">
-        <div class="mock-list-item"><span><strong style="color:var(--text)">Nathaly P&eacute;rez</strong></span><span class="mock-pill ok">Due&ntilde;a</span></div>
-        <div class="mock-list-item"><span>Camila Rojas</span><span class="mock-tag">Ejecutivo</span></div>
-        <div class="mock-list-item"><span>Felipe Moreno</span><span class="mock-tag">Ejecutivo</span></div>
-        <div class="mock-list-item"><span>Diego Campos</span><span style="font-size:8px;background:rgba(212,165,116,.15);color:#E8C9A0;padding:1px 6px;border-radius:4px;font-weight:700">Freelance</span></div>
-        <div class="mock-list-item"><span>Gym FitZone (cliente)</span><span style="font-size:8px;background:rgba(34,197,94,.15);color:#4ADE80;padding:1px 6px;border-radius:4px;font-weight:700">Cliente</span></div>
-        <div style="margin-top:12px;text-align:right"><div style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:linear-gradient(135deg,#7C3AED,#D4A574);border-radius:6px;font-size:9px;font-weight:700;color:white">+ Nuevo usuario</div></div>
-      </div>
-      <div class="img-label">Admin &middot; Gesti&oacute;n de Usuarios</div>
-    </div>
+<!-- HASHTAG MARQUEE -->
+<div class="hashtag-marquee">
+  <div class="hashtag-track">
+    <span class="hashtag-item">#SocialMediaManager</span>
+    <span class="hashtag-item gray">#Salud</span>
+    <span class="hashtag-item">#Deporte</span>
+    <span class="hashtag-item gray">#Bienestar</span>
+    <span class="hashtag-item">#Asesorías1a1</span>
+    <span class="hashtag-item gray">#NathalyVarela</span>
+    <span class="hashtag-item">#SocialMediaManager</span>
+    <span class="hashtag-item gray">#Salud</span>
+    <span class="hashtag-item">#Deporte</span>
+    <span class="hashtag-item gray">#Bienestar</span>
+    <span class="hashtag-item">#Asesorías1a1</span>
+    <span class="hashtag-item gray">#NathalyVarela</span>
   </div>
+</div>
 
-  <h3 style="margin-top:3rem;margin-bottom:0.5rem;">Estructura de roles</h3>
-  <p class="section-desc" style="margin-bottom:1.5rem">Cada rol tiene permisos espec&iacute;ficos seg&uacute;n la funci&oacute;n real dentro de la agencia.</p>
-  <table class="roles-table">
-    <thead><tr><th>Rol</th><th>Acceso</th><th>Puede hacer</th></tr></thead>
-    <tbody>
-      <tr><td><span class="role-badge duena">Due&ntilde;a</span></td><td>Todo el sistema</td><td>Gesti&oacute;n total: usuarios, finanzas, clientes, m&eacute;tricas, gui&oacute;nes, reportes globales</td></tr>
-      <tr><td><span class="role-badge ejecutivo">Ejecutivo de Cuenta</span></td><td>Sus cuentas: gui&oacute;nes, m&eacute;tricas, calendario, tareas</td><td>Crear gui&oacute;nes, gestionar calendario, ver m&eacute;tricas de sus clientes</td></tr>
-      <tr><td><span class="role-badge freelance">Freelance</span></td><td>Tareas asignadas + gui&oacute;nes espec&iacute;ficos</td><td>Completar tareas y gui&oacute;nes asignados por el ejecutivo</td></tr>
-      <tr><td><span class="role-badge cliente">Cliente Externo</span></td><td>Portal propio: gui&oacute;nes a aprobar, m&eacute;tricas propias</td><td>Aprobar gui&oacute;nes, ver sus m&eacute;tricas, descargar reportes mensuales</td></tr>
-    </tbody>
-  </table>
-</section>
+<!-- 01 · TU SITUACIÓN HOY -->
+<section class="bleed" id="hoy">
+  <div class="container">
+    <span class="eyebrow" data-r><span class="e-dot"></span>01 · Tu situación hoy</span>
+    <h2 class="title" data-r>Ya tienes <em>audiencia</em>.<br>Falta plataforma.</h2>
+    <p class="lead" data-r>
+      Analizamos tu perfil de Instagram <strong style="color:var(--white)">@redessociales.cl_</strong>. Tu base existe, está validada y crece. Lo que limita tu escalabilidad no es el contenido · es la operación detrás.
+    </p>
 
-<!-- ═══════════ TECNOLOGÍA ═══════════ -->
-<section id="tecnologia">
-  <span class="section-label">Infraestructura</span>
-  <h2>Tecnolog&iacute;a de Primer Nivel</h2>
-  <p class="section-desc">
-    Construida con las mismas tecnolog&iacute;as que usan Vercel, Linear y Notion. R&aacute;pida, segura y escalable. Cada cliente tiene sus datos completamente aislados. Stack flexible: eleg&iacute;s AWS o Vercel para hosting, Supabase o Airtable para datos &mdash; seg&uacute;n volumen y control.
-  </p>
-
-  <div class="tech-grid">
-    <div class="tech-item"><div class="tech-name">Next.js 16</div><div class="tech-desc">Framework web moderno, veloz</div></div>
-    <div class="tech-item"><div class="tech-name">Supabase &middot; Airtable</div><div class="tech-desc">DB + auth + storage &middot; flexibilidad seg&uacute;n escala</div></div>
-    <div class="tech-item"><div class="tech-name">AWS &middot; Vercel</div><div class="tech-desc">Hosting global &middot; eleg&iacute;s seg&uacute;n control vs simpleza</div></div>
-    <div class="tech-item"><div class="tech-name">PWA</div><div class="tech-desc">Instalable en celular como app</div></div>
-    <div class="tech-item"><div class="tech-name">Groq + Claude</div><div class="tech-desc">IA generativa para gui&oacute;nes</div></div>
-    <div class="tech-item"><div class="tech-name">Instagram Graph API</div><div class="tech-desc">Posts, m&eacute;tricas, stories, reels</div></div>
-    <div class="tech-item"><div class="tech-name">Facebook Graph API</div><div class="tech-desc">P&aacute;ginas, insights, Ads</div></div>
-    <div class="tech-item"><div class="tech-name">WhatsApp Business API</div><div class="tech-desc">Mensajes, plantillas, automatizaci&oacute;n</div></div>
-    <div class="tech-item"><div class="tech-name">TikTok Business API</div><div class="tech-desc">M&eacute;tricas y contenido TikTok</div></div>
-    <div class="tech-item"><div class="tech-name">YouTube Data API</div><div class="tech-desc">Analytics y m&eacute;tricas YouTube</div></div>
-  </div>
-
-  <div class="cards-grid" style="margin-top:3rem">
-    <div class="info-card"><div class="card-icon">📱</div><h4>Funciona en celular</h4><p>Dise&ntilde;o 100% responsive. Se instala como app en el celular sin pasar por App Store. Los ejecutivos acceden desde cualquier lugar.</p></div>
-    <div class="info-card"><div class="card-icon">🔐</div><h4>Datos aislados por cliente</h4><p>Row-Level Security en Supabase: cada cliente solo puede ver sus propios datos, aunque compartan la misma base de datos.</p></div>
-    <div class="info-card"><div class="card-icon">⚡</div><h4>Carga ultra-r&aacute;pida</h4><p>Servido desde la red global de Vercel con CDN. Carga en menos de 1 segundo desde cualquier lugar de Chile.</p></div>
-  </div>
-</section>
-
-<!-- ═══════════ INVERSIÓN ═══════════ -->
-<section id="inversion">
-  <span class="section-label">Modelo Comercial</span>
-  <h2>Proyecto + Cuidado mensual</h2>
-  <p class="section-desc">
-    Construimos la plataforma por fases, con pagos en hitos. Despu&eacute;s del lanzamiento, el equipo SMC cuida el sistema: actualizaciones, soporte y mejoras continuas.
-  </p>
-
-  <div class="pricing-grid">
-    <div class="price-card featured">
-      <div class="featured-tag">Empezamos aqu&iacute; &mdash; Fase 1</div>
-      <div class="price-label">Landing page profesional</div>
-      <h3>Landing Page premium &mdash; Tu carta de presentaci&oacute;n</h3>
-      <div style="margin-top:1rem"><span class="price-num">$250.000</span><span class="price-unit"> CLP &nbsp;&middot;&nbsp; 1&ndash;2 semanas</span></div>
-      <ul>
-        <li>Dise&ntilde;o custom alineado a tu marca (salud &middot; deporte &middot; bienestar)</li>
-        <li>Mobile-first responsive &middot; 100% optimizado celular</li>
-        <li>Secciones: hero &middot; servicios &middot; testimonios &middot; cursos &middot; contacto</li>
-        <li>Bot&oacute;n WhatsApp directo (reemplaza wa.link)</li>
-        <li>Formulario captura de leads para Asesor&iacute;as 1:1</li>
-        <li>Integraci&oacute;n Instagram embed feed</li>
-        <li>Hosting + dominio incluidos (primer a&ntilde;o)</li>
-        <li>Analytics &middot; SEO b&aacute;sico &middot; pixel Meta</li>
-      </ul>
-      <div class="price-note">Pago 50% inicio &middot; 50% al lanzar. Si avanzamos a Fase 2, descuenta del primer hito.</div>
-    </div>
-    <div class="price-card">
-      <div class="featured-tag">Fase 2 &mdash; Plataforma</div>
-      <div class="price-label">Plataforma base</div>
-      <h3>Dashboard + Gui&oacute;nes + M&eacute;tricas</h3>
-      <div style="margin-top:1rem"><span class="price-num">$1.000.000</span><span class="price-unit"> CLP &nbsp;&middot;&nbsp; 1 palo &middot; 4&ndash;6 semanas</span></div>
-      <ul>
-        <li>Dashboard operativo por cliente</li>
-        <li>M&oacute;dulo de gui&oacute;nes con IA (Groq + Claude)</li>
-        <li>Sincronizaci&oacute;n Meta + TikTok + YouTube</li>
-        <li>Calendario editorial con alertas</li>
-        <li>Portal de aprobaci&oacute;n para clientes</li>
-        <li>Autenticaci&oacute;n + gesti&oacute;n de usuarios y roles</li>
-        <li>PWA instalable en celular</li>
-        <li>Hosting y dominio primer a&ntilde;o incluido</li>
-      </ul>
-      <div class="price-note">Pago en 3 hitos: inicio &middot; entrega beta &middot; lanzamiento</div>
-    </div>
-    <div class="price-card">
-      <div class="price-label">Fase 3 &mdash; Opcional</div>
-      <h3>Finanzas + Publicaci&oacute;n autom&aacute;tica</h3>
-      <div style="margin-top:1rem"><span class="price-num">$1.000.000</span><span class="price-unit"> CLP &nbsp;&middot;&nbsp; 1 palo &middot; 3&ndash;4 semanas</span></div>
-      <ul>
-        <li>M&oacute;dulo financiero: margen por cliente</li>
-        <li>Seguimiento de horas por cuenta</li>
-        <li>Estado de cobranza con alertas</li>
-        <li>Reporte financiero mensual autom&aacute;tico</li>
-        <li>Publicaci&oacute;n autom&aacute;tica desde la plataforma</li>
-      </ul>
-      <div class="price-note">Se activa despu&eacute;s de validar la Fase 2 en producci&oacute;n</div>
-    </div>
-    <div class="price-card">
-      <div class="price-label">Care &mdash; mensual</div>
-      <h3>Soporte + Mejoras continuas</h3>
-      <div style="margin-top:1rem"><span class="price-num">$150.000</span><span class="price-unit"> CLP / mes</span></div>
-      <ul>
-        <li>Correcci&oacute;n de bugs en menos de 24h</li>
-        <li>Actualizaciones de seguridad</li>
-        <li>Ajustes de UI/UX menores sin costo</li>
-        <li>Cambios de datos (clientes, usuarios)</li>
-        <li>Monitoreo proactivo del sistema</li>
-      </ul>
-      <div class="price-note">M&iacute;nimo 3 meses. Sin contrato anual obligatorio.</div>
-    </div>
-  </div>
-
-  <div style="margin-top:3rem;padding:2rem;background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);border-radius:16px">
-    <h4 style="margin-bottom:0.75rem;font-size:1rem">No incluido en el precio</h4>
-    <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7">Costos de APIs externas (Meta Graph, TikTok Business, YouTube &mdash; seg&uacute;n plan) &middot; Dominio propio si ya se tiene uno &middot; Pauta publicitaria en redes sociales &middot; Costos de uso de IA (Groq / Claude) seg&uacute;n volumen de gui&oacute;nes generados</p>
-  </div>
-
-  <div style="margin-top:2rem">
-    <h3 style="margin-bottom:1rem">Hoja de ruta</h3>
-    <div class="roadmap">
-      <div class="roadmap-item done">
-        <h4>Fase 1 &mdash; Landing Page <span class="phase-tag next">EMPEZAMOS AQU&Iacute;</span></h4>
-        <p>Carta de presentaci&oacute;n profesional &middot; 1-2 semanas &middot; <strong>$250.000 CLP</strong>. Dise&ntilde;o custom mobile-first nicho salud/deporte/bienestar, formulario asesor&iacute;as 1:1, WhatsApp directo, embed Instagram. Reemplaza wa.link y profesionaliza marca.</p>
+    <div class="real-data">
+      <div data-r>
+        <div class="real-phone">
+          <div class="real-phone-header">
+            <div class="real-avatar"><div class="real-avatar-inner">N</div></div>
+            <div class="real-handle">
+              <div class="h">@redessociales.cl_</div>
+              <div class="b">Nathaly Varela · 💡 SMM 🧠</div>
+            </div>
+          </div>
+          <div class="real-stats">
+            <div class="s"><div class="s-v">154</div><div class="s-l">Posts</div></div>
+            <div class="s"><div class="s-v">2.671</div><div class="s-l">Followers</div></div>
+            <div class="s"><div class="s-v">992</div><div class="s-l">Siguiendo</div></div>
+          </div>
+          <div class="real-bio">
+            💡 Gestión de redes y Mkt para <strong>salud, deporte y bienestar</strong><br>
+            ⭐ Potencia tu marca con estrategias personalizadas<br>
+            👩‍💻 Talleres y Asesorías 1:1
+          </div>
+          <div class="real-highlights">
+            <div class="real-h"><div class="real-h-inner">📱</div></div>
+            <div class="real-h"><div class="real-h-inner">💼</div></div>
+            <div class="real-h"><div class="real-h-inner">💡</div></div>
+            <div class="real-h"><div class="real-h-inner">🎓</div></div>
+            <div class="real-h"><div class="real-h-inner">⭐</div></div>
+            <div class="real-h"><div class="real-h-inner">🛍️</div></div>
+          </div>
+        </div>
       </div>
-      <div class="roadmap-item current">
-        <h4>Fase 2 &mdash; Plataforma Base <span class="phase-tag planned">PR&Oacute;XIMO</span></h4>
-        <p>Dashboard, login por roles, m&oacute;dulo de gui&oacute;nes con IA, sincronizaci&oacute;n de m&eacute;tricas (Meta, TikTok, YouTube), calendario editorial con alertas, portal de aprobaci&oacute;n para clientes. <strong>$1.000.000 CLP (1 palo)</strong> &middot; 4-6 semanas.</p>
-      </div>
-      <div class="roadmap-item">
-        <h4>Fase 3 &mdash; Finanzas + Publicaci&oacute;n <span class="phase-tag planned">PLANIFICADO</span></h4>
-        <p>M&oacute;dulo de margen por cliente, seguimiento de horas, estado de cobranza, reportes financieros autom&aacute;ticos y publicaci&oacute;n directa desde la plataforma. <strong>$1.000.000 CLP (1 palo)</strong> &middot; 3-4 semanas.</p>
-      </div>
-      <div class="roadmap-item">
-        <h4>Fase 4 &mdash; Automatizaci&oacute;n Avanzada <span class="phase-tag planned">PLANIFICADO</span></h4>
-        <p>Programaci&oacute;n y publicaci&oacute;n autom&aacute;tica en todas las redes, sugerencias de mejor horario por cuenta, notificaciones push al cliente. <strong>$1.500.000 CLP (1.5 palos)</strong> &middot; 4 semanas.</p>
-      </div>
-      <div class="roadmap-item">
-        <h4>Fase 5 &mdash; Portal Cliente Premium <span class="phase-tag planned">PLANIFICADO</span></h4>
-        <p>App dedicada para clientes: seguimiento de campa&ntilde;as en tiempo real, aprobaciones, chat directo con el ejecutivo y acceso a todos los reportes hist&oacute;ricos. <strong>$2.000.000 CLP (2 palos)</strong> &middot; 5-6 semanas.</p>
-      </div>
-      <div class="roadmap-item" style="border-top:2px solid rgba(176,141,76,.40);padding-top:1.2rem;margin-top:.8rem">
-        <h4>Total ruta completa <span class="phase-tag" style="background:rgba(176,141,76,.20);color:#c9a463">$5.750.000 CLP</span></h4>
-        <p><strong>F1 + F2 + F3 + F4 + F5 = $250K + $1M + $1M + $1.5M + $2M = $5.750.000 CLP (5.75 palos).</strong> Pagable por fase &middot; cada una valida la siguiente.</p>
+      <div class="real-info" data-r>
+        <h3>Lo que tenemos para empezar.</h3>
+        <p>Tu perfil ya está posicionado en un nicho específico (salud · deporte · bienestar). 2.671 personas confían en tu contenido. Tu cuello de botella no es el contenido · es la operación: clientes en WhatsApp · cobranza manual · sin reportes · sin escalabilidad.</p>
+        <ul class="data-list">
+          <li><span class="k">Posts publicados</span><span class="v">154 publicaciones · ratio audiencia saludable</span></li>
+          <li><span class="k">Modelo actual</span><span class="v">1:1 + talleres + cursos · artesanal</span></li>
+          <li><span class="k">Stack hoy</span><span class="v">Instagram + WhatsApp directo (wa.link/ko8l4t)</span></li>
+          <li><span class="k">Highlights</span><span class="v">RRSS · +Clientes · +Tips · Cursos · Servicios · Clientes · Productos</span></li>
+          <li><span class="k">Oportunidad</span><span class="v">Escalar de freelance a agencia con plataforma propia</span></li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ FOOTER ═══════════ -->
+<!-- 02 · REELS CAROUSEL · qué construimos -->
+<section class="bleed" style="padding-top:0">
+  <div class="container">
+    <span class="eyebrow" data-r><span class="e-dot"></span>02 · Qué construimos</span>
+    <h2 class="title" data-r>5 piezas. <em>Una plataforma</em>.</h2>
+    <p class="lead" data-r>
+      Cada pieza es independiente · cada una puede vivir sola · juntas son tu agencia operando con piloto automático. Mira cada una como un Reel.
+    </p>
+  </div>
+  <div class="reels-track">
+    <div class="reel reel-1">
+      <div class="reel-content">
+        <div class="r-eyebrow">Fase 1 · $250K CLP</div>
+        <h4>Landing profesional</h4>
+        <p>Tu carta de presentación · captura leads · reemplaza wa.link.</p>
+      </div>
+      <div class="reel-actions">
+        <div class="reel-action"><svg viewBox="0 0 24 24" fill="white"><path d="M12 21s-7-4.5-9.5-9C.8 8.5 3 5 6.5 5c2 0 3.5 1 4 2.5h3c.5-1.5 2-2.5 4-2.5C21 5 23.2 8.5 21.5 12 19 16.5 12 21 12 21z"/></svg><span>—</span></div>
+        <div class="reel-action"><svg viewBox="0 0 24 24" fill="white"><path d="M21.6 5.2L18 8 14.4 5.2C13.2 4.4 11.6 4.8 11 6L7 16c-.4 1.2.4 2.4 1.6 2.4h6.8c1.2 0 2-1.2 1.6-2.4L13 6.8z" opacity=".9"/></svg><span>—</span></div>
+      </div>
+    </div>
+    <div class="reel reel-2">
+      <div class="reel-content">
+        <div class="r-eyebrow">Fase 2 · $1M CLP</div>
+        <h4>Plataforma base</h4>
+        <p>Dashboard · guiones IA &lt;24h · sync Meta/TikTok/YT · calendario · aprobaciones.</p>
+      </div>
+      <div class="reel-actions">
+        <div class="reel-action"><svg viewBox="0 0 24 24" fill="white"><path d="M12 21s-7-4.5-9.5-9C.8 8.5 3 5 6.5 5c2 0 3.5 1 4 2.5h3c.5-1.5 2-2.5 4-2.5C21 5 23.2 8.5 21.5 12 19 16.5 12 21 12 21z"/></svg><span>—</span></div>
+      </div>
+    </div>
+    <div class="reel reel-3">
+      <div class="reel-content">
+        <div class="r-eyebrow">Fase 3 · $1M CLP</div>
+        <h4>Finanzas + publicación</h4>
+        <p>Margen por cliente · cobranza · horas · publicación auto.</p>
+      </div>
+      <div class="reel-actions">
+        <div class="reel-action"><svg viewBox="0 0 24 24" fill="white"><path d="M12 21s-7-4.5-9.5-9C.8 8.5 3 5 6.5 5c2 0 3.5 1 4 2.5h3c.5-1.5 2-2.5 4-2.5C21 5 23.2 8.5 21.5 12 19 16.5 12 21 12 21z"/></svg><span>—</span></div>
+      </div>
+    </div>
+    <div class="reel reel-4">
+      <div class="reel-content">
+        <div class="r-eyebrow">Fase 4 · $1.5M CLP</div>
+        <h4>Automatización avanzada</h4>
+        <p>Programación auto · horarios óptimos · notificaciones push.</p>
+      </div>
+      <div class="reel-actions">
+        <div class="reel-action"><svg viewBox="0 0 24 24" fill="white"><path d="M12 21s-7-4.5-9.5-9C.8 8.5 3 5 6.5 5c2 0 3.5 1 4 2.5h3c.5-1.5 2-2.5 4-2.5C21 5 23.2 8.5 21.5 12 19 16.5 12 21 12 21z"/></svg><span>—</span></div>
+      </div>
+    </div>
+    <div class="reel reel-5">
+      <div class="reel-content">
+        <div class="r-eyebrow">Fase 5 · $2M CLP</div>
+        <h4>Portal cliente premium</h4>
+        <p>Apps dedicadas · chat directo · campañas en tiempo real.</p>
+      </div>
+      <div class="reel-actions">
+        <div class="reel-action"><svg viewBox="0 0 24 24" fill="white"><path d="M12 21s-7-4.5-9.5-9C.8 8.5 3 5 6.5 5c2 0 3.5 1 4 2.5h3c.5-1.5 2-2.5 4-2.5C21 5 23.2 8.5 21.5 12 19 16.5 12 21 12 21z"/></svg><span>—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · FASES en pesos chilenos -->
+<section class="bleed bleed-light" id="fases">
+  <div class="container">
+    <span class="eyebrow" data-r><span class="e-dot"></span>03 · Inversión por fase</span>
+    <h2 class="title" data-r>Empezamos por <em>$250.000</em>.</h2>
+    <p class="lead" data-r>
+      Pagas solo lo que estás listo para usar. Cada fase valida la siguiente · cero compromiso anual · cero sorpresas.
+    </p>
+
+    <div class="phases-wrap"><div class="phases">
+      <div class="phase featured" data-r>
+        <span class="phase-tag">Empezamos aquí</span>
+        <h3>Fase 1 · Landing</h3>
+        <div class="phase-time">1-2 semanas</div>
+        <div class="phase-price"><span class="clp">$250.000</span><span class="unit">CLP</span></div>
+        <ul>
+          <li>Diseño custom mobile-first nicho salud/deporte/bienestar</li>
+          <li>Formulario captura leads asesorías 1:1</li>
+          <li>WhatsApp Business directo (reemplaza wa.link)</li>
+          <li>Embed Instagram feed</li>
+          <li>Analytics · SEO · pixel Meta</li>
+          <li>Hosting + dominio primer año</li>
+        </ul>
+        <div class="phase-note">50% inicio · 50% al lanzar. Si avanzas a F2, descuenta del primer hito.</div>
+      </div>
+      <div class="phase" data-r>
+        <span class="phase-tag">Fase 2</span>
+        <h3>Plataforma base</h3>
+        <div class="phase-time">4-6 semanas · 1 palo</div>
+        <div class="phase-price"><span class="clp">$1.000.000</span><span class="unit">CLP</span></div>
+        <ul>
+          <li>Dashboard operativo por cliente</li>
+          <li>Módulo guiones con IA (Groq + Claude)</li>
+          <li>Sync Meta + TikTok + YouTube</li>
+          <li>Calendario editorial con alertas</li>
+          <li>Portal aprobación clientes</li>
+          <li>PWA instalable en celular</li>
+        </ul>
+        <div class="phase-note">3 hitos: inicio · beta · lanzamiento</div>
+      </div>
+      <div class="phase" data-r>
+        <span class="phase-tag">Fase 3</span>
+        <h3>Finanzas + publicación</h3>
+        <div class="phase-time">3-4 semanas · 1 palo</div>
+        <div class="phase-price"><span class="clp">$1.000.000</span><span class="unit">CLP</span></div>
+        <ul>
+          <li>Margen por cliente · seguimiento horas</li>
+          <li>Estado cobranza con alertas</li>
+          <li>Reporte financiero mensual auto</li>
+          <li>Publicación directa desde plataforma</li>
+        </ul>
+        <div class="phase-note">Se activa al validar Fase 2 en producción</div>
+      </div>
+      <div class="phase" data-r>
+        <span class="phase-tag">Fase 4</span>
+        <h3>Automatización</h3>
+        <div class="phase-time">4 semanas · 1.5 palos</div>
+        <div class="phase-price"><span class="clp">$1.500.000</span><span class="unit">CLP</span></div>
+        <ul>
+          <li>Programación auto todas las redes</li>
+          <li>Sugerencias horarios óptimos por cuenta</li>
+          <li>Notificaciones push al cliente</li>
+          <li>Workflows automatizados</li>
+        </ul>
+        <div class="phase-note">Requiere F2 + F3 activas</div>
+      </div>
+      <div class="phase" data-r>
+        <span class="phase-tag">Fase 5</span>
+        <h3>Portal cliente premium</h3>
+        <div class="phase-time">5-6 semanas · 2 palos</div>
+        <div class="phase-price"><span class="clp">$2.000.000</span><span class="unit">CLP</span></div>
+        <ul>
+          <li>App dedicada para clientes</li>
+          <li>Seguimiento campañas tiempo real</li>
+          <li>Chat directo con ejecutivo</li>
+          <li>Reportes históricos completos</li>
+        </ul>
+        <div class="phase-note">El cliente decide cuándo activarlo</div>
+      </div>
+      <div class="phase" data-r>
+        <span class="phase-tag">Care</span>
+        <h3>Soporte mensual</h3>
+        <div class="phase-time">Mínimo 3 meses</div>
+        <div class="phase-price"><span class="clp">$150.000</span><span class="unit">CLP/mes</span></div>
+        <ul>
+          <li>Correcciones bugs &lt;24h</li>
+          <li>Actualizaciones seguridad</li>
+          <li>Ajustes UI/UX menores sin costo</li>
+          <li>Monitoreo proactivo</li>
+        </ul>
+        <div class="phase-note">Sin contrato anual obligatorio</div>
+      </div>
+    </div>
+
+    </div></div>
+
+    <div class="total-band" data-r>
+      <div>
+        <div class="tb-label">Ruta completa F1 → F5</div>
+        <div class="tb-num">$5.750.000 CLP</div>
+        <div class="tb-sub">$250K + $1M + $1M + $1.5M + $2M · 5.75 palos · pagables por fase</div>
+      </div>
+      <a href="https://wa.link/ko8l4t" target="_blank" class="cta-btn" style="background:var(--ink);color:var(--white)">Hablemos <span class="cta-heart">❤️</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · TECH -->
+<section class="bleed" id="tech">
+  <div class="container">
+    <span class="eyebrow" data-r><span class="e-dot"></span>04 · Stack técnico</span>
+    <h2 class="title" data-r>Tecnología de <em>primer nivel</em>.</h2>
+    <p class="lead" data-r>
+      Las mismas herramientas que usan Vercel, Linear y Notion. Rápida, segura y escalable. Stack flexible: eliges hosting y base de datos según volumen y control.
+    </p>
+    <div class="tech-grid">
+      <div class="tech-card" data-r><div class="tech-icon">⚡</div><div class="tech-name">Next.js 16</div><div class="tech-desc">Framework web moderno · veloz · SEO</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">🗄️</div><div class="tech-name">Supabase · Airtable</div><div class="tech-desc">DB + auth + storage · según escala</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">☁️</div><div class="tech-name">AWS · Vercel</div><div class="tech-desc">Hosting global · eliges control vs simpleza</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">📱</div><div class="tech-name">PWA</div><div class="tech-desc">Instalable en celular como app</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">🧠</div><div class="tech-name">Groq + Claude</div><div class="tech-desc">IA generativa para guiones &lt;24h</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">📷</div><div class="tech-name">Instagram Graph API</div><div class="tech-desc">Posts · stories · reels · métricas</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">📘</div><div class="tech-name">Facebook Graph API</div><div class="tech-desc">Páginas · insights · Ads</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">💬</div><div class="tech-name">WhatsApp Business API</div><div class="tech-desc">Mensajes · plantillas · automatización</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">🎵</div><div class="tech-name">TikTok Business API</div><div class="tech-desc">Métricas y contenido TikTok</div></div>
+      <div class="tech-card" data-r><div class="tech-icon">▶️</div><div class="tech-name">YouTube Data API</div><div class="tech-desc">Analytics y métricas YouTube</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · EQUIPO -->
+<section class="bleed bleed-light" id="equipo">
+  <div class="container">
+    <span class="eyebrow" data-r><span class="e-dot"></span>05 · Equipo SMC</span>
+    <h2 class="title" data-r>3 personas. <em>Una misión</em>.</h2>
+    <p class="lead" data-r>
+      Un equipo chico que se mueve rápido. Cada rol con responsabilidad clara · comunicación directa contigo · sin intermediarios.
+    </p>
+    <div class="team-grid">
+      <div class="team-card" data-r>
+        <div class="team-avatar"><div class="team-avatar-inner">G</div></div>
+        <h4>Guillermo González</h4>
+        <div class="team-role">Service Manager + Arquitecto</div>
+        <div class="team-bio">Lidera el proyecto · arquitectura técnica · interfaz directa contigo · garantiza entregables a tiempo.</div>
+      </div>
+      <div class="team-card" data-r>
+        <div class="team-avatar"><div class="team-avatar-inner">S</div></div>
+        <h4>Sebastián</h4>
+        <div class="team-role">Frontend · DB · Server · Deploy</div>
+        <div class="team-bio">Stack completo Next.js + Supabase · automatización N2 · publicación productiva · todo el dev técnico.</div>
+      </div>
+      <div class="team-card" data-r>
+        <div class="team-avatar"><div class="team-avatar-inner">S</div></div>
+        <h4>Sergio</h4>
+        <div class="team-role">Consultor APIs Sociales</div>
+        <div class="team-bio">Especialista en Meta · TikTok · YouTube · Instagram APIs. Sincronización de métricas que escala con tu volumen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <h2>¿Empezamos por la <em style="font-style:italic">landing</em>?</h2>
+    <p>$250.000 CLP · 1-2 semanas de entrega · 50% al iniciar · 50% al lanzar. Si avanzas a la plataforma completa después, este monto descuenta del primer hito.</p>
+    <a href="https://wa.link/ko8l4t" target="_blank" class="cta-btn">Empezar por WhatsApp <span class="cta-heart">❤️</span></a>
+  </div>
+</section>
+
+</main>
+
 <footer>
-  <div class="brand">Smart Connection</div>
-  <p style="margin-bottom:0.5rem">Creado por <a href="https://smconnection.cl" target="_blank">Smart Connection &middot; smconnection.cl</a></p>
-  <p>Propuesta confidencial preparada para <strong>Agencia Nathaly</strong> &bull; Mayo 2026</p>
-  <p style="margin-top:1rem;font-size:0.75rem;color:rgba(255,255,255,0.3)">guillermo.gonzalez@smconnection.cl</p>
+  <div class="f-brand">RedesSociales.cl</div>
+  <div class="f-links">
+    <a href="https://www.instagram.com/redessociales.cl_/" target="_blank">Instagram</a>
+    <a href="https://wa.link/ko8l4t" target="_blank">WhatsApp</a>
+    <a href="warroom.html">War Room SMC</a>
+    <a href="https://smconnection.cl" target="_blank">Smart Connection</a>
+  </div>
+  <p>Propuesta plataforma SaaS · Nathaly Varela · 2026-05-13 · Diseñado por SMC</p>
 </footer>
+
+<!-- WhatsApp FAB -->
+<a class="wa-fab" href="https://wa.link/ko8l4t" target="_blank" aria-label="WhatsApp directo">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3s1 2.7 1.1 2.9c.1.2 2 3 4.9 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.3 1.2 4.7L2 22l5.4-1.2c1.4.8 3 1.2 4.6 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+</a>
+
+<!-- Double-tap heart container -->
+<div class="dt-heart" id="dtHeart">❤️</div>
+
+<!-- Sound toggle TikTok -->
+<button class="sound-toggle" id="soundToggle" aria-label="Sound on/off" title="Sound on/off">🔊</button>
+
+<!-- For You vertical indicator -->
+<div class="fy-indicator" id="fyIndicator"></div>
+
+<script>
+/* STORY BARS · 5 stories · cada una se llena según scroll progress */
+(function(){
+  const fills = document.querySelectorAll('[data-story]');
+  if(!fills.length) return;
+  window.addEventListener('scroll', ()=>{
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if(total <= 0) return;
+    const pct = (window.scrollY/total)*100;
+    fills.forEach((f,i)=>{
+      const start = i*20;
+      const end = (i+1)*20;
+      let local = (pct - start)/(end - start) * 100;
+      local = Math.max(0, Math.min(100, local));
+      f.style.width = local + '%';
+    });
+  }, {passive:true});
+})();
+
+/* DOUBLE TAP HEART · estilo IG */
+(function(){
+  const heart = document.getElementById('dtHeart');
+  if(!heart) return;
+  let lastTap = 0, lastTarget = null;
+  document.addEventListener('click', e=>{
+    if(e.target.closest('a,button,input,textarea,.nav,.wa-fab')) return;
+    const now = Date.now();
+    if(now - lastTap < 350){
+      heart.style.left = e.clientX + 'px';
+      heart.style.top = e.clientY + 'px';
+      heart.classList.remove('show');
+      void heart.offsetWidth;
+      heart.classList.add('show');
+      setTimeout(()=>heart.classList.remove('show'), 900);
+      lastTap = 0;
+    } else {
+      lastTap = now;
+    }
+  });
+})();
+
+/* REVEAL ON SCROLL */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('[data-r]').forEach(el=>obs.observe(el));
+})();
+
+/* SMOOTH SCROLL nav links */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t = document.querySelector(a.getAttribute('href'));
+    if(!t) return;
+    e.preventDefault();
+    const top = t.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({top, behavior:'smooth'});
+  });
+});
+
+/* ════════ MOTION RedesSociales.cl SIGNATURE ════════ */
+
+/* M3 · LIKE BURST en CTAs (botones primary + WhatsApp) */
+document.querySelectorAll('.btn-primary,.cta-btn,.wa-fab,.nav-cta').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    const r = btn.getBoundingClientRect();
+    const burst = document.createElement('span');
+    burst.className = 'like-burst go';
+    burst.textContent = '+1 ❤️';
+    burst.style.left = '50%';
+    burst.style.top = '-10px';
+    burst.style.position = 'absolute';
+    btn.style.position = btn.style.position || 'relative';
+    btn.appendChild(burst);
+    setTimeout(()=>burst.remove(), 1100);
+  });
+});
+
+/* M5 · SOUND TOGGLE TikTok */
+const st = document.getElementById('soundToggle');
+let soundOn = true;
+if(st){
+  st.addEventListener('click', ()=>{
+    soundOn = !soundOn;
+    st.textContent = soundOn ? '🔊' : '🔇';
+    st.style.background = soundOn ? 'rgba(10,10,10,.85)' : 'var(--tt-pink)';
+  });
+}
+
+/* M8 · STORY VIEW SHIMMER · al entrar sección añade .viewed */
+if('IntersectionObserver' in window){
+  const sweepObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('viewed');
+        sweepObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -100px 0px'});
+  document.querySelectorAll('section.bleed').forEach(s=>sweepObs.observe(s));
+}
+
+/* M11 · BUBBLE RIPPLE en cards */
+document.querySelectorAll('.tech-card,.phase,.team-card,.reel').forEach(card=>{
+  card.addEventListener('click', e=>{
+    const r = card.getBoundingClientRect();
+    const b = document.createElement('span');
+    b.className = 'bubble-ripple';
+    b.style.left = (e.clientX - r.left) + 'px';
+    b.style.top = (e.clientY - r.top) + 'px';
+    b.style.width = b.style.height = '40px';
+    card.appendChild(b);
+    setTimeout(()=>b.remove(), 920);
+  });
+});
+
+/* M14 · FOR YOU INDICATOR · dots laterales por sección */
+const fy = document.getElementById('fyIndicator');
+if(fy){
+  const secs = document.querySelectorAll('section.bleed,section.hero,section.cta-band');
+  secs.forEach((s,i)=>{
+    const d = document.createElement('a');
+    d.className = 'fy-dot';
+    d.href = '#'+(s.id || 'sec'+i);
+    if(s.id) d.href = '#'+s.id;
+    fy.appendChild(d);
+  });
+  setTimeout(()=>fy.classList.add('show'), 1500);
+  if('IntersectionObserver' in window){
+    const fyObs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const idx = Array.from(secs).indexOf(e.target);
+          fy.querySelectorAll('.fy-dot').forEach((d,i)=>{
+            d.classList.toggle('active', i === idx);
+          });
+        }
+      });
+    }, {rootMargin:'-40% 0px -50% 0px'});
+    secs.forEach(s=>fyObs.observe(s));
+  }
+}
+</script>
 
 </body>
 </html>
