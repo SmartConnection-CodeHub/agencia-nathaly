@@ -58,27 +58,32 @@ img,video,svg{max-width:100%;height:auto;display:block}
    INSTAGRAM LAYOUT · sidebar izquierdo desktop · bottom nav mobile
    ════════════════════════════════════════ */
 .ig-sidebar{
-  position:fixed;top:0;left:0;bottom:0;width:244px;z-index:100;
+  position:fixed;top:0;left:0;bottom:0;width:72px;z-index:100;
   background:var(--ink);border-right:1px solid var(--border);
-  padding:24px 12px 20px;display:flex;flex-direction:column;
+  padding:18px 8px;display:flex;flex-direction:column;align-items:center;
   overflow-y:auto;scrollbar-width:none;
 }
 .ig-sidebar::-webkit-scrollbar{display:none}
-.ig-sb-brand{padding:18px 12px 28px;text-decoration:none;display:flex;align-items:center;gap:10px}
-.ig-sb-brand .b-mark{width:28px;height:28px;border-radius:50%;background:var(--ig);padding:2px}
-.ig-sb-brand .b-mark span{display:flex;width:100%;height:100%;border-radius:50%;background:var(--ink);align-items:center;justify-content:center;color:var(--white);font-weight:900;font-size:12px}
-.ig-sb-brand .b-name{font-family:var(--font-display);font-style:italic;font-size:24px;font-weight:800;color:var(--white);letter-spacing:-.02em}
-.ig-sb-item{display:flex;align-items:center;gap:16px;padding:12px;border-radius:10px;text-decoration:none;color:var(--white);font-size:15px;font-weight:500;transition:background .2s,transform .15s;margin-bottom:4px;cursor:pointer;position:relative}
-.ig-sb-item:hover{background:rgba(255,255,255,.06);transform:scale(.98)}
-.ig-sb-item.active{font-weight:700}
-.ig-sb-item.active .ig-sb-icon{transform:scale(1.1)}
-.ig-sb-icon{font-size:24px;line-height:1;width:26px;height:26px;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.ig-sb-brand{padding:14px 0 24px;text-decoration:none;display:flex;align-items:center;justify-content:center;width:100%}
+.ig-sb-brand .b-mark{width:30px;height:30px;border-radius:50%;background:var(--ig);padding:2px;position:relative}
+.ig-sb-brand .b-mark span{display:flex;width:100%;height:100%;border-radius:50%;background:var(--ink);align-items:center;justify-content:center;color:var(--white);font-weight:900;font-size:13px}
+.ig-sb-brand .b-name{display:none}
+.ig-sb-item{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;text-decoration:none;color:var(--white);transition:background .2s,transform .15s;margin-bottom:8px;cursor:pointer;position:relative}
+.ig-sb-item span:not(.ig-sb-icon):not(.ig-sb-badge){display:none}
+.ig-sb-item:hover{background:rgba(255,255,255,.08);transform:scale(.94)}
+.ig-sb-item.active .ig-sb-icon{transform:scale(1.15)}
+.ig-sb-item::after{content:attr(data-label);position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(-8px);background:var(--ink-2);color:var(--white);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:200;border:1px solid var(--border)}
+.ig-sb-item:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
+.ig-sb-icon{line-height:1;width:26px;height:26px;display:flex;align-items:center;justify-content:center;transition:transform .15s}
 .ig-sb-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ig-sb-item.active .ig-sb-icon svg{fill:currentColor;stroke-width:1.4}
-.ig-sb-spacer{flex:1}
-.ig-sb-cta{margin-top:auto;padding:12px;background:var(--ig);color:var(--white);border-radius:10px;text-align:center;text-decoration:none;font-size:13px;font-weight:700;transition:transform .2s}
-.ig-sb-cta:hover{transform:scale(1.02)}
-.ig-sb-badge{position:absolute;right:14px;width:8px;height:8px;border-radius:50%;background:var(--tt-pink);animation:pulse 1.4s infinite}
+.ig-sb-spacer{flex:1;min-height:8px}
+.ig-sb-cta{margin-top:auto;width:48px;height:48px;border-radius:14px;background:var(--ig);color:var(--white);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .25s;position:relative}
+.ig-sb-cta:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(214,41,118,.40)}
+.ig-sb-cta svg{width:22px;height:22px;fill:currentColor}
+.ig-sb-cta::after{content:'Hablemos por WhatsApp';position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(-8px);background:var(--ink-2);color:var(--white);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:200;border:1px solid var(--border)}
+.ig-sb-cta:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
+.ig-sb-badge{position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;background:var(--tt-pink);animation:pulse 1.4s infinite;border:2px solid var(--ink)}
 
 /* MOBILE bottom nav IG-style */
 .ig-mobile-top{position:fixed;top:0;left:0;right:0;z-index:90;height:54px;background:var(--ink);border-bottom:1px solid var(--border);display:none;align-items:center;justify-content:space-between;padding:0 14px}
@@ -92,7 +97,7 @@ img,video,svg{max-width:100%;height:auto;display:block}
 .ig-bottom-nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
 
 /* MAIN content area · centered like IG feed */
-.ig-content{margin-left:244px;min-height:100vh;width:calc(100% - 244px)}
+.ig-content{margin-left:72px;min-height:100vh;width:calc(100% - 72px)}
 
 @media (max-width:900px){
   .ig-sidebar{display:none}
@@ -644,48 +649,41 @@ section.bleed.viewed::after{animation:storySweep 1.4s cubic-bezier(.22,1,.36,1) 
     <div class="b-name">RedesSociales.cl</div>
   </a>
 
-  <a href="#hero" class="ig-sb-item active">
+  <a href="#hero" class="ig-sb-item active" data-label="Inicio">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v10h14V10"/></svg></span>
-    <span>Inicio</span>
   </a>
-  <a href="#hoy" class="ig-sb-item">
+  <a href="#hoy" class="ig-sb-item" data-label="Tu situación">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-    <span>Tu situación</span>
   </a>
-  <a href="#fases" class="ig-sb-item">
+  <a href="#fases" class="ig-sb-item" data-label="Explora fases">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><circle cx="12" cy="12" r="3"/></svg></span>
-    <span>Explora fases</span>
   </a>
-  <a href="#tech" class="ig-sb-item">
+  <a href="#tech" class="ig-sb-item" data-label="Reels tech">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
-    <span>Reels tech</span>
   </a>
-  <a href="https://wa.link/ko8l4t" target="_blank" class="ig-sb-item">
+  <a href="https://wa.link/ko8l4t" target="_blank" class="ig-sb-item" data-label="Mensajes">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
-    <span>Mensajes</span>
     <span class="ig-sb-badge"></span>
   </a>
-  <a href="#equipo" class="ig-sb-item">
+  <a href="#equipo" class="ig-sb-item" data-label="Notificaciones">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-    <span>Notificaciones</span>
   </a>
-  <a href="#fases" class="ig-sb-item">
+  <a href="#fases" class="ig-sb-item" data-label="Crear">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-    <span>Crear</span>
   </a>
-  <a href="#hero" class="ig-sb-item">
+  <a href="#hero" class="ig-sb-item" data-label="Perfil">
     <span class="ig-sb-icon"><div style="width:22px;height:22px;border-radius:50%;background:var(--ig);padding:1.5px"><div style="width:100%;height:100%;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:10px">N</div></div></span>
-    <span>Perfil</span>
   </a>
 
   <div class="ig-sb-spacer"></div>
 
-  <a href="warroom.html" class="ig-sb-item">
+  <a href="warroom.html" class="ig-sb-item" data-label="War Room SMC">
     <span class="ig-sb-icon"><svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
-    <span>War Room SMC</span>
   </a>
 
-  <a href="https://wa.link/ko8l4t" target="_blank" class="ig-sb-cta">Hablemos por WhatsApp ❤️</a>
+  <a href="https://wa.link/ko8l4t" target="_blank" class="ig-sb-cta" aria-label="Hablemos por WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3s1 2.7 1.1 2.9c.1.2 2 3 4.9 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.3 1.2 4.7L2 22l5.4-1.2c1.4.8 3 1.2 4.6 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+  </a>
 </aside>
 
 <!-- IG MOBILE TOP · brand + actions -->
@@ -1056,16 +1054,8 @@ section.bleed.viewed::after{animation:storySweep 1.4s cubic-bezier(.22,1,.36,1) 
 
 </div><!-- /ig-content -->
 
-<!-- WhatsApp FAB -->
-<a class="wa-fab" href="https://wa.link/ko8l4t" target="_blank" aria-label="WhatsApp directo">
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3s1 2.7 1.1 2.9c.1.2 2 3 4.9 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.3 1.2 4.7L2 22l5.4-1.2c1.4.8 3 1.2 4.6 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-</a>
-
 <!-- Double-tap heart container -->
 <div class="dt-heart" id="dtHeart">❤️</div>
-
-<!-- Sound toggle TikTok -->
-<button class="sound-toggle" id="soundToggle" aria-label="Sound on/off" title="Sound on/off">🔊</button>
 
 <!-- For You vertical indicator -->
 <div class="fy-indicator" id="fyIndicator"></div>
@@ -1254,7 +1244,7 @@ Copy this entire block into each propuesta-*.html BEFORE </body>
 -->
 
 <style>
-.tsw{position:fixed;left:24px;bottom:24px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif}
+.tsw{position:fixed;right:24px;bottom:24px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif}
 .tsw-fab{
   width:56px;height:56px;border-radius:50%;
   background:conic-gradient(from 0deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#25f4ee,#fe2c55,#feda75);
@@ -1282,7 +1272,7 @@ Copy this entire block into each propuesta-*.html BEFORE </body>
 @keyframes tswPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
 
 .tsw-menu{
-  position:absolute;bottom:72px;left:0;
+  position:absolute;bottom:72px;right:0;
   background:rgba(15,15,15,.96);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
   border:1px solid rgba(255,255,255,.10);border-radius:18px;
   padding:14px;min-width:280px;
@@ -1315,14 +1305,14 @@ Copy this entire block into each propuesta-*.html BEFORE </body>
 .tsw-foot strong{color:rgba(255,255,255,.75);font-weight:700}
 
 @media (max-width:900px){
-  .tsw{left:auto;right:90px;bottom:14px}
-  .tsw-menu{min-width:260px;left:auto;right:0}
+  .tsw{right:14px;bottom:64px}
+  .tsw-menu{min-width:260px;right:0}
 }
 @media (max-width:480px){
-  .tsw{right:80px;bottom:8px}
+  .tsw{right:14px;bottom:62px}
   .tsw-fab{width:48px;height:48px}
   .tsw-fab::after{font-size:18px}
-  .tsw-menu{min-width:240px;bottom:60px}
+  .tsw-menu{min-width:240px;bottom:60px;right:0}
 }
 </style>
 
