@@ -383,6 +383,88 @@ footer p{font-size:11px;color:var(--gray-2);letter-spacing:.04em}
 @media (hover:none){[data-r]{opacity:1;transform:none}}
 
 /* ════════════════════════════════════════════════════
+   THEMES · misma HTML · 3 sistemas visuales por data-theme
+   ════════════════════════════════════════════════════ */
+
+/* THEME 2 · PURPLE PREMIUM */
+[data-theme="purple"] body{background:#0F0A1A;color:#F1F0F5}
+[data-theme="purple"] .hero{background:radial-gradient(ellipse at 30% 20%,rgba(124,58,237,.28) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(212,165,116,.18) 0%,transparent 60%),#0F0A1A}
+[data-theme="purple"] .ig-sidebar{background:#0F0A1A;border-right-color:rgba(255,255,255,.08)}
+[data-theme="purple"] .hashtag-marquee{background:#0F0A1A;border-color:rgba(255,255,255,.08)}
+[data-theme="purple"] .hashtag-item{background:linear-gradient(135deg,#7C3AED 0%,#D4A574 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="purple"] .hashtag-item.gray{-webkit-text-fill-color:rgba(255,255,255,.15);color:rgba(255,255,255,.15)}
+[data-theme="purple"] section.bleed-light{background:#1a1025;color:#F1F0F5}
+[data-theme="purple"] section.bleed-light h2,[data-theme="purple"] section.bleed-light h3{color:#F1F0F5}
+[data-theme="purple"] section.bleed-light p,[data-theme="purple"] section.bleed-light .lead{color:#9CA3AF}
+[data-theme="purple"] section.bleed-light .phase{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.10);box-shadow:none}
+[data-theme="purple"] section.bleed-light .phase h3,[data-theme="purple"] section.bleed-light .phase .phase-price .clp{color:#F1F0F5}
+[data-theme="purple"] section.bleed-light .phase ul li{color:#9CA3AF}
+[data-theme="purple"] section.bleed-light .phase-tag{background:rgba(255,255,255,.08);color:#9CA3AF}
+[data-theme="purple"] section.bleed-light .phase.featured{background:linear-gradient(180deg,rgba(124,58,237,.10) 0%,rgba(255,255,255,.04) 100%);border-color:rgba(124,58,237,.40)}
+[data-theme="purple"] section.bleed-light .phase.featured::before{background:linear-gradient(135deg,#7C3AED,#D4A574)}
+[data-theme="purple"] section.bleed-light .phase.featured .phase-tag{background:linear-gradient(135deg,#7C3AED,#D4A574);color:#fff}
+[data-theme="purple"] .phases-wrap::after{background:linear-gradient(90deg,transparent 0%,#1a1025 100%)}
+[data-theme="purple"] .total-band,[data-theme="purple"] .cta-band{background:linear-gradient(135deg,#7C3AED 0%,#D4A574 100%)}
+[data-theme="purple"] .real-phone{background:#1a1025;border-color:rgba(255,255,255,.10)}
+[data-theme="purple"] .real-avatar,[data-theme="purple"] .team-avatar,[data-theme="purple"] .nav-avatar,[data-theme="purple"] .nav-avatar::before,[data-theme="purple"] .real-avatar::before,[data-theme="purple"] .team-avatar::before{background:linear-gradient(135deg,#7C3AED 0%,#D4A574 100%) !important}
+[data-theme="purple"] .tech-card,[data-theme="purple"] .team-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+[data-theme="purple"] .ig-sb-cta{background:linear-gradient(135deg,#7C3AED 0%,#D4A574 100%)}
+[data-theme="purple"] footer .f-brand{background:linear-gradient(135deg,#7C3AED 0%,#D4A574 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="purple"] .reel-1{background:linear-gradient(135deg,#5B21B6 0%,#7C3AED 100%)}
+[data-theme="purple"] .reel-2{background:linear-gradient(135deg,#7C3AED 0%,#A78BFA 100%)}
+[data-theme="purple"] .reel-3{background:linear-gradient(135deg,#A78BFA 0%,#D4A574 100%)}
+[data-theme="purple"] .reel-4{background:linear-gradient(135deg,#D4A574 0%,#7C3AED 100%)}
+[data-theme="purple"] .reel-5{background:linear-gradient(135deg,#5B21B6 0%,#D4A574 100%)}
+[data-theme="purple"] .btn-primary,[data-theme="purple"] .nav-cta{background:linear-gradient(135deg,#7C3AED 0%,#D4A574 100%)}
+
+/* THEME 3 · APPLE MINIMAL */
+[data-theme="minimal"] body{background:#ffffff;color:#0a0a0a}
+[data-theme="minimal"] .hero{background:linear-gradient(180deg,#fff 0%,#f5f5f7 100%);color:#0a0a0a}
+[data-theme="minimal"] .hero h1{color:#0a0a0a}
+[data-theme="minimal"] .hero p.lead{color:#6e6e73}
+[data-theme="minimal"] .hero-eyebrow{background:#f5f5f7;border-color:#e8e8ed;color:#6e6e73}
+[data-theme="minimal"] .nav{background:rgba(255,255,255,.85);border-bottom-color:#e8e8ed}
+[data-theme="minimal"] .nav-name{color:#0a0a0a}
+[data-theme="minimal"] .nav-links a{color:#1d1d1f}
+[data-theme="minimal"] .ig-sidebar{background:#fff;border-right-color:#e8e8ed}
+[data-theme="minimal"] .ig-sb-item{color:#0a0a0a}
+[data-theme="minimal"] .ig-sb-item:hover{background:#f5f5f7}
+[data-theme="minimal"] .ig-mobile-top,[data-theme="minimal"] .ig-bottom-nav{background:#fff;border-color:#e8e8ed}
+[data-theme="minimal"] .ig-mobile-top .b,[data-theme="minimal"] .ig-bottom-nav a{color:#0a0a0a}
+[data-theme="minimal"] section.bleed-light{background:#fafafa}
+[data-theme="minimal"] section.bleed:not(.bleed-light){background:#fff;color:#0a0a0a}
+[data-theme="minimal"] section.bleed h2.title{color:#0a0a0a}
+[data-theme="minimal"] section.bleed p.lead{color:#6e6e73}
+[data-theme="minimal"] .phase{background:#fff;border-color:#e8e8ed;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+[data-theme="minimal"] .phase h3,[data-theme="minimal"] .phase .phase-price .clp{color:#0a0a0a}
+[data-theme="minimal"] .phase ul li{color:#6e6e73}
+[data-theme="minimal"] .phase-tag{background:#f5f5f7;color:#6e6e73}
+[data-theme="minimal"] .phase.featured{background:linear-gradient(180deg,#fff 0%,#f5f5f7 100%);border:1px solid #0a0a0a}
+[data-theme="minimal"] .phase.featured .phase-tag{background:#0a0a0a;color:#fff}
+[data-theme="minimal"] .tech-card,[data-theme="minimal"] .team-card{background:#fff;border-color:#e8e8ed}
+[data-theme="minimal"] .tech-card .tech-name,[data-theme="minimal"] .team-card h4{color:#0a0a0a}
+[data-theme="minimal"] .tech-card .tech-desc,[data-theme="minimal"] .team-card .team-bio{color:#6e6e73}
+[data-theme="minimal"] .real-phone{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+[data-theme="minimal"] .real-info h3{color:#0a0a0a}
+[data-theme="minimal"] .real-info p,[data-theme="minimal"] .real-info .data-list li{color:#6e6e73}
+[data-theme="minimal"] .real-info .data-list li{border-color:#e8e8ed}
+[data-theme="minimal"] .real-info .data-list li .k{color:#0a0a0a}
+[data-theme="minimal"] .hashtag-marquee{background:#fafafa;border-color:#e8e8ed}
+[data-theme="minimal"] .hashtag-item.gray{-webkit-text-fill-color:#d2d2d7;color:#d2d2d7}
+[data-theme="minimal"] .phases-wrap::after{background:linear-gradient(90deg,transparent 0%,#fafafa 100%)}
+[data-theme="minimal"] footer{background:#fff;border-color:#e8e8ed}
+[data-theme="minimal"] footer .f-links a{color:#6e6e73}
+[data-theme="minimal"] footer p{color:#86868b}
+[data-theme="minimal"] .btn-primary,[data-theme="minimal"] .nav-cta{background:#0a0a0a;color:#fff}
+[data-theme="minimal"] .ig-sb-cta{background:#0a0a0a;color:#fff}
+[data-theme="minimal"] .cta-band{background:#0a0a0a;color:#fff}
+[data-theme="minimal"] .cta-btn{background:#fff;color:#0a0a0a}
+[data-theme="minimal"] .total-band{background:#0a0a0a;color:#fff}
+
+/* Smooth transitions entre themes */
+body,section,.phase,.tech-card,.team-card,.real-phone,.hero,.nav,.ig-sidebar,.hashtag-marquee,footer{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
+
+/* ════════════════════════════════════════════════════
    MOTION SIGNATURE · RedesSociales.cl · vertical IG/TikTok
    15 efectos únicos del nicho redes sociales
    ════════════════════════════════════════════════════ */
@@ -1213,37 +1295,37 @@ Copy this entire block into each propuesta-*.html BEFORE </body>
 </style>
 
 <div class="tsw" id="tsw">
-  <button class="tsw-fab" id="tswFab" aria-label="Cambiar template">
+  <button class="tsw-fab" id="tswFab" aria-label="Cambiar tema visual">
     <span class="tsw-pulse"></span>
   </button>
   <div class="tsw-menu" id="tswMenu">
     <div class="tsw-head">
-      <div class="h">🎨 Cambia el template</div>
-      <div class="s">Misma propuesta · 3 estilos · pick tu favorito</div>
+      <div class="h">🎨 Cambia el sistema visual</div>
+      <div class="s">Mismo contenido · 3 themes · cambio instantáneo</div>
     </div>
-    <a href="propuesta.html" class="tsw-opt" data-t="ig">
+    <button class="tsw-opt" data-theme="ig" type="button">
       <div class="tsw-thumb tsw-thumb-1"></div>
       <div class="tsw-info">
-        <div class="n">Instagram Layout</div>
-        <div class="d">Sidebar nativo IG · doble-tap heart · 15 motion</div>
+        <div class="n">Instagram Native</div>
+        <div class="d">Dark IG gradient · doble-tap heart · 15 motion redes</div>
       </div>
-    </a>
-    <a href="propuesta-v2-purple.html" class="tsw-opt" data-t="purple">
+    </button>
+    <button class="tsw-opt" data-theme="purple" type="button">
       <div class="tsw-thumb tsw-thumb-2"></div>
       <div class="tsw-info">
         <div class="n">Purple Premium</div>
         <div class="d">Dark purple + gold · estilo Linear/Notion</div>
       </div>
-    </a>
-    <a href="propuesta-v3-minimal.html" class="tsw-opt" data-t="minimal">
+    </button>
+    <button class="tsw-opt" data-theme="minimal" type="button">
       <div class="tsw-thumb tsw-thumb-3"></div>
       <div class="tsw-info">
         <div class="n">Apple Minimal</div>
         <div class="d">White clean · tipografía editorial · serif</div>
       </div>
-    </a>
+    </button>
     <div class="tsw-foot">
-      <strong>SMC Design Atomic.</strong> Granularidad atómica · cambias el sistema visual sin tocar contenido. Las 3 versiones llevan el mismo mensaje en estilos distintos.
+      <strong>SMC Design Atomic.</strong> Misma página · 3 sistemas visuales sin recargar. Granularidad atómica · cambias el look en milisegundos.
     </div>
   </div>
 </div>
@@ -1252,18 +1334,36 @@ Copy this entire block into each propuesta-*.html BEFORE </body>
 (function(){
   const fab=document.getElementById('tswFab'),menu=document.getElementById('tswMenu');
   if(!fab||!menu)return;
-  fab.addEventListener('click',()=>{
+  const KEY='rs_theme';
+  // Apply saved theme
+  const saved=localStorage.getItem(KEY)||'ig';
+  document.body.dataset.theme=saved;
+  fab.addEventListener('click',e=>{
+    e.stopPropagation();
     const o=menu.classList.toggle('open');
     fab.classList.toggle('open',o);
   });
   document.addEventListener('click',e=>{
-    if(!e.target.closest('#tsw'))menu.classList.remove('open'),fab.classList.remove('open');
+    if(!e.target.closest('#tsw')){menu.classList.remove('open');fab.classList.remove('open')}
   });
-  // Mark active by current file
-  const cur=location.pathname.split('/').pop()||'propuesta.html';
-  document.querySelectorAll('.tsw-opt').forEach(a=>{
-    if(a.getAttribute('href')===cur)a.classList.add('active');
+  function mark(){
+    const cur=document.body.dataset.theme||'ig';
+    document.querySelectorAll('.tsw-opt').forEach(b=>{
+      b.classList.toggle('active', b.dataset.theme===cur);
+    });
+  }
+  document.querySelectorAll('.tsw-opt').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const t=btn.dataset.theme;
+      document.body.dataset.theme=t;
+      localStorage.setItem(KEY,t);
+      mark();
+      // Cierra menú después de 400ms con animación
+      setTimeout(()=>{menu.classList.remove('open');fab.classList.remove('open')},420);
+    });
   });
+  mark();
 })();
 </script>
 
