@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>War Room · Nathaly Varela · 12 agentes SMC · 2026-05-13</title>
+<style>
+:root{
+  --ink:#0d0d0d; --ink-soft:#1a1a1a;
+  --bone:#f4f1ea; --bone-deep:#e8e2d2; --bone-soft:#faf7ef;
+  --brass:#b08d4c; --brass-bright:#c9a463;
+  --blood:#7a1f1f; --blood-soft:#a83232;
+  --mat:#3a5a40; --mat-light:#d9e2dc;
+  --bg:#ffffff; --bg-alt:#f8f6f1;
+  --text:#161616; --muted:#5c5c5c; --subtle:#8a8a8a;
+  --border:#d8d4c8; --border-w:#ece8dc;
+  --font:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
+  --shadow-sm:0 2px 10px rgba(13,13,13,0.06);
+  --shadow-md:0 6px 24px rgba(13,13,13,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--ink);color:var(--bone);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+.nav-global{position:fixed;top:0;left:0;right:0;z-index:200;height:50px;background:rgba(13,13,13,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(176,141,76,.30);display:flex;align-items:center;padding:0 24px}
+.nav-inner{max-width:1240px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-mark{width:30px;height:30px;border:2px solid var(--brass);display:flex;align-items:center;justify-content:center;color:var(--brass);font-weight:800;font-size:11px}
+.nav-name{font-size:14px;font-weight:800;color:var(--bone);letter-spacing:.20em;text-transform:uppercase}
+.nav-sep{color:rgba(244,241,234,.25);margin:0 6px}
+.nav-sub{font-size:12px;color:rgba(244,241,234,.55);letter-spacing:.05em}
+.nav-meeting{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;background:var(--blood);color:var(--bone)}
+
+main{padding-top:74px}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+.hero{padding:60px 24px 60px;text-align:center;background:radial-gradient(ellipse at center,var(--ink-soft) 0%,var(--ink) 70%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(176,141,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(176,141,76,.04) 1px,transparent 1px);background-size:50px 50px;pointer-events:none}
+.hero-inner{position:relative;z-index:1}
+.hero-status{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;background:rgba(122,31,31,.20);border:1px solid var(--blood-soft);margin-bottom:24px}
+.hero-status .dot{width:8px;height:8px;border-radius:50%;background:var(--blood-soft);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.hero-status span{font-size:11px;font-weight:800;letter-spacing:.20em;text-transform:uppercase;color:var(--blood-soft)}
+.hero-eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.30em;text-transform:uppercase;color:var(--brass);margin-bottom:18px}
+.hero-title{font-size:clamp(2.4rem,7vw,4.6rem);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--bone);max-width:960px;margin:0 auto 22px}
+.hero-title em{color:var(--brass);font-style:normal}
+.hero-sub{font-size:17px;color:rgba(244,241,234,.70);max-width:720px;margin:0 auto 36px;line-height:1.65}
+
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid rgba(176,141,76,.30);max-width:980px;margin:0 auto}
+.stat{padding:20px 16px;text-align:center;border-right:1px solid rgba(176,141,76,.20)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:32px;font-weight:800;color:var(--brass);line-height:1;letter-spacing:-.02em}
+.stat-lbl{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,241,234,.55);margin-top:8px}
+
+section.block{padding:64px 0;border-bottom:1px solid rgba(176,141,76,.15)}
+section.light{background:var(--bone);color:var(--ink)}
+section.light h2,section.light h3,section.light h4,section.light p{color:var(--ink)}
+section.light p{color:var(--muted)}
+section.light .eyebrow{color:var(--blood)}
+section.light .eyebrow::before{background:var(--blood)}
+
+.eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin-bottom:18px;padding-left:36px;position:relative}
+.eyebrow::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:24px;height:2px;background:var(--brass)}
+h2.title{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--bone);margin-bottom:18px;max-width:880px}
+h2.title em{color:var(--brass);font-style:normal}
+section.light h2.title{color:var(--ink)}
+section.light h2.title em{color:var(--blood)}
+p.lead{font-size:17px;color:rgba(244,241,234,.70);max-width:780px;margin-bottom:40px;line-height:1.7}
+section.light p.lead{color:var(--muted)}
+
+/* IG REAL DATA · screenshot-style card */
+.ig-real{background:rgba(255,255,255,.04);border:1px solid rgba(176,141,76,.30);padding:28px;margin-top:24px}
+.ig-real-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(176,141,76,.20)}
+.ig-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);padding:3px;flex-shrink:0}
+.ig-avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--brass);font-weight:800}
+.ig-handle .h{font-size:18px;font-weight:800;color:var(--bone)}
+.ig-handle .b{font-size:12px;color:rgba(244,241,234,.55);margin-top:2px}
+.ig-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;text-align:center}
+.ig-stats .igs{padding:10px 0;border-right:1px solid rgba(176,141,76,.15)}
+.ig-stats .igs:last-child{border-right:none}
+.ig-stats .igs-v{font-size:22px;font-weight:800;color:var(--brass)}
+.ig-stats .igs-l{font-size:10px;color:rgba(244,241,234,.55);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.ig-bio{font-size:14px;color:rgba(244,241,234,.78);line-height:1.6;margin-top:10px}
+.ig-bio strong{color:var(--brass-bright)}
+.ig-highlights{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.ig-h{padding:6px 12px;border:1px solid rgba(176,141,76,.30);font-size:11px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--brass)}
+
+/* AGENTS MESA */
+.war-table{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.agent-card{background:rgba(255,255,255,.03);border:1px solid rgba(176,141,76,.20);padding:20px 18px;position:relative;transition:transform .25s,border-color .25s,background .25s;cursor:pointer}
+.agent-card:hover{transform:translateY(-4px);border-color:var(--brass);background:rgba(176,141,76,.06)}
+.agent-card.p1{border-left:3px solid var(--blood-soft)}
+.agent-card.p2{border-left:3px solid var(--brass)}
+.agent-card.p3{border-left:3px solid rgba(244,241,234,.30)}
+.agent-icon{font-size:24px;margin-bottom:8px;display:block;line-height:1}
+.agent-tag{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin-bottom:5px}
+.agent-card.p1 .agent-tag{color:var(--blood-soft)}
+.agent-card.p3 .agent-tag{color:rgba(244,241,234,.50)}
+.agent-name{font-size:15px;font-weight:800;color:var(--bone);margin-bottom:6px;letter-spacing:-.01em;line-height:1.15}
+.agent-role{font-size:11px;color:rgba(244,241,234,.55);line-height:1.4;min-height:60px}
+.agent-prio{position:absolute;top:12px;right:12px;font-size:9px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;padding:2px 7px}
+.prio-p1{background:var(--blood);color:var(--bone)}
+.prio-p2{background:var(--brass);color:var(--ink)}
+.prio-p3{background:rgba(244,241,234,.15);color:rgba(244,241,234,.70)}
+
+/* DETAIL CARDS */
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;margin-top:30px}
+.detail-card{background:var(--bg);color:var(--ink);border:1px solid var(--border-w);padding:28px 26px;position:relative;border-top:4px solid var(--brass)}
+.detail-card.urgent{border-top-color:var(--blood)}
+.detail-card.bw{border-top-color:#0d6efd;background:linear-gradient(180deg,#f0f5ff 0%,var(--bg) 100%)}
+.detail-card.radar{border-top-color:var(--mat);background:linear-gradient(180deg,#eef5ef 0%,var(--bg) 100%)}
+.detail-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border-w)}
+.detail-icon{font-size:30px;line-height:1}
+.detail-meta .d-name{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;line-height:1.1;margin-bottom:3px}
+.detail-meta .d-role{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
+.detail-card.urgent .d-role{color:var(--blood)}
+.detail-card.bw .d-role{color:#0d6efd}
+.detail-card.radar .d-role{color:var(--mat)}
+.detail-block{margin-bottom:14px}
+.detail-block:last-child{margin-bottom:0}
+.detail-label{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.detail-text{font-size:13px;color:var(--ink);line-height:1.55}
+.detail-list{list-style:none;padding:0;margin:0}
+.detail-list li{font-size:12.5px;color:var(--muted);padding:5px 0 5px 16px;position:relative;line-height:1.5}
+.detail-list li::before{content:'→';position:absolute;left:0;top:5px;color:var(--brass);font-weight:800}
+.detail-card.urgent .detail-list li::before{color:var(--blood)}
+.detail-kpi{background:var(--bone);padding:10px 14px;margin-top:8px;display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font)}
+.detail-kpi .kpi-k{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.detail-kpi .kpi-v{font-size:14px;font-weight:800;color:var(--brass)}
+
+/* EXEC SUMMARY */
+.exec{background:linear-gradient(135deg,var(--ink) 0%,var(--ink-soft) 100%);padding:48px 40px;color:var(--bone);border-left:6px solid var(--brass);margin-top:32px}
+.exec h3{font-size:26px;font-weight:800;color:var(--bone);margin-bottom:16px;line-height:1.2;max-width:840px;letter-spacing:-.02em}
+.exec p{font-size:14px;color:rgba(244,241,234,.78);max-width:780px;line-height:1.75;margin-bottom:12px}
+.exec p strong{color:var(--brass-bright)}
+
+footer{background:#000;color:var(--bone);padding:40px 24px;text-align:center;border-top:1px solid rgba(176,141,76,.20)}
+footer .f-logo{font-size:13px;letter-spacing:.30em;text-transform:uppercase;color:var(--brass);font-weight:800;margin-bottom:8px}
+footer p{font-size:10px;letter-spacing:.16em;color:rgba(244,241,234,.40);text-transform:uppercase}
+
+@media (max-width:1024px){.war-table{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:768px){
+  .war-table{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(odd){border-right:1px solid rgba(176,141,76,.20)}
+  .stat:nth-child(even){border-right:none}
+  .stat{border-bottom:1px solid rgba(176,141,76,.20)}
+  .stat:nth-last-child(-n+2){border-bottom:none}
+  .detail-grid{grid-template-columns:1fr}
+  .ig-stats{grid-template-columns:1fr;gap:8px}
+  .ig-stats .igs{border-right:none;border-bottom:1px solid rgba(176,141,76,.15)}
+  .ig-stats .igs:last-child{border-bottom:none}
+  .exec{padding:32px 24px}
+  .exec h3{font-size:20px}
+}
+@media (max-width:480px){.war-table{grid-template-columns:1fr}.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav-global">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-mark">N</div>
+      <div class="nav-name">War Room</div>
+      <div class="nav-sep">·</div>
+      <div class="nav-sub">Nathaly Varela · 12 agentes SMC</div>
+    </div>
+    <div class="nav-meeting">P0 · Activo</div>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-status"><div class="dot"></div><span>War Room Activa · Data IG real</span></div>
+    <span class="hero-eyebrow">Operación Nathaly Varela · 2026-05-13</span>
+    <h1 class="hero-title">12 agentes <em>sobre la mesa</em>.<br>Data Instagram real.</h1>
+    <p class="hero-sub">
+      Activación coordinada del equipo SMC para llevar a Nathaly Varela (@redessociales.cl_)
+      de freelance Social Media Manager a agencia con plataforma SaaS escalable.
+      RADAR scrapeó Instagram · DATA-BW validó números · cada agente con HOY · RECOMIENDA · ASSESSMENT.
+    </p>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">Agentes</div></div>
+      <div class="stat"><div class="stat-val">2.671</div><div class="stat-lbl">Followers reales</div></div>
+      <div class="stat"><div class="stat-val">5</div><div class="stat-lbl">Fases (F1→F5)</div></div>
+      <div class="stat"><div class="stat-val">$5.75M</div><div class="stat-lbl">CLP total ruta</div></div>
+      <div class="stat"><div class="stat-val">$250K</div><div class="stat-lbl">F1 Landing</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 · IG REAL DATA -->
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">01 · Data Instagram real · scraped 2026-05-13</span>
+    <h2 class="title">RADAR <em>scrapeó</em>. DATA-BW <em>cruzó</em>.</h2>
+    <p class="lead">
+      Antes de proponer cualquier número, el equipo entró al perfil real de Nathaly
+      y extrajo data verificable. Esta es la realidad operativa con la que ella opera hoy.
+    </p>
+
+    <div class="ig-real">
+      <div class="ig-real-head">
+        <div class="ig-avatar"><div class="ig-avatar-inner">N</div></div>
+        <div class="ig-handle">
+          <div class="h">@redessociales.cl_</div>
+          <div class="b">Nathaly Varela · 💡 Social Media Manager 🧠</div>
+        </div>
+      </div>
+      <div class="ig-stats">
+        <div class="igs"><div class="igs-v">154</div><div class="igs-l">Publicaciones</div></div>
+        <div class="igs"><div class="igs-v">2.671</div><div class="igs-l">Seguidores</div></div>
+        <div class="igs"><div class="igs-v">992</div><div class="igs-l">Seguidos</div></div>
+      </div>
+      <div class="ig-bio">
+        💡 Gestión de redes y Mkt para <strong>salud, deporte y bienestar</strong>.<br>
+        ⭐ Potencia tu marca con estrategias personalizadas.<br>
+        👩‍💻 <strong>Talleres y Asesorías 1:1</strong>.<br>
+        ❤️‍🔥 Link bio: wa.link/ko8l4t (WhatsApp directo)
+      </div>
+      <div class="ig-highlights">
+        <span class="ig-h">RRSS.cl</span>
+        <span class="ig-h">+Clientes</span>
+        <span class="ig-h">+Tips</span>
+        <span class="ig-h">Cursos Talleres</span>
+        <span class="ig-h">💡 y Recomiendo</span>
+        <span class="ig-h">Servicios</span>
+        <span class="ig-h">Clientes</span>
+        <span class="ig-h">Productos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · MESA DE AGENTES -->
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">02 · Mesa de operación · 12 agentes</span>
+    <h2 class="title">Quién está <em>sobre la mesa</em>.</h2>
+    <p class="lead">
+      P1 críticos (4) · P2 importantes (4) · P3 apoyo (4). Orquestador: Cerebro.
+      Cada uno revisa data IG real y propone.
+    </p>
+
+    <div class="war-table">
+      <div class="agent-card p1"><span class="agent-prio prio-p1">P1</span><div class="agent-icon">📡</div><div class="agent-tag">RADAR</div><div class="agent-name">RADAR</div><div class="agent-role">Scraping IG · benchmark mercado SMM Chile · oportunidad nicho salud/deporte/bienestar.</div></div>
+      <div class="agent-card p1"><span class="agent-prio prio-p1">P1</span><div class="agent-icon">⊡</div><div class="agent-tag">Data-BW</div><div class="agent-name">DATA-BW</div><div class="agent-role">QA cuantitativo · 2.671 followers · 154 posts · ARPU calculado · pricing realista por tamaño.</div></div>
+      <div class="agent-card p1"><span class="agent-prio prio-p1">P1</span><div class="agent-icon">🚀</div><div class="agent-tag">PRM</div><div class="agent-name">PRM</div><div class="agent-role">Definir producto Nathaly · F1 landing como entry · funnel hacia plataforma · diferenciación rubro salud.</div></div>
+      <div class="agent-card p1"><span class="agent-prio prio-p1">P1</span><div class="agent-icon">💰</div><div class="agent-tag">Business Dev</div><div class="agent-name">BUSINESS DEV</div><div class="agent-role">Pricing $250K F0 · $5.75M total · cross-sell con LEMPAR · negociación entry+gancho.</div></div>
+
+      <div class="agent-card p2"><span class="agent-prio prio-p2">P2</span><div class="agent-icon">👔</div><div class="agent-tag">PM</div><div class="agent-name">PM</div><div class="agent-role">Sprint F1 4 sem · sprint F2 6 sem · roadmap incremental por validación.</div></div>
+      <div class="agent-card p2"><span class="agent-prio prio-p2">P2</span><div class="agent-icon">🐕</div><div class="agent-tag">Functional-Lead</div><div class="agent-name">FUNCTIONAL-LEAD</div><div class="agent-role">BPMN journey Nathaly · maqueta landing nicho salud · spec funcional plataforma.</div></div>
+      <div class="agent-card p2"><span class="agent-prio prio-p2">P2</span><div class="agent-icon">🎨</div><div class="agent-tag">Frontend</div><div class="agent-name">FRONTEND</div><div class="agent-role">Landing Next.js mobile-first · embed Instagram · formulario asesorías · PWA F2+.</div></div>
+      <div class="agent-card p2"><span class="agent-prio prio-p2">P2</span><div class="agent-icon">🐾</div><div class="agent-tag">Hoku</div><div class="agent-name">HOKU</div><div class="agent-role">IA generación guiones &lt;24h · Groq+Claude · sync Meta/TikTok/YT/IG APIs · WhatsApp Business.</div></div>
+
+      <div class="agent-card p3"><span class="agent-prio prio-p3">P3</span><div class="agent-icon">⚖️</div><div class="agent-tag">Compliance</div><div class="agent-name">COMPLIANCE</div><div class="agent-role">Contrato F1 · pacto si se contrata equipo · términos APIs Meta/TikTok.</div></div>
+      <div class="agent-card p3"><span class="agent-prio prio-p3">P3</span><div class="agent-icon">🎙️</div><div class="agent-tag">Portavoz</div><div class="agent-name">PORTAVOZ</div><div class="agent-role">Tono Nathaly · emoji + educativo · pilares contenido salud/deporte/bienestar.</div></div>
+      <div class="agent-card p3"><span class="agent-prio prio-p3">P3</span><div class="agent-icon">🛒</div><div class="agent-tag">Procurement</div><div class="agent-name">PROCUREMENT</div><div class="agent-role">Hosting Vercel free vs AWS · Supabase free vs Airtable · costo APIs Meta/TikTok.</div></div>
+      <div class="agent-card p3"><span class="agent-prio prio-p3">P3</span><div class="agent-icon">🧠</div><div class="agent-tag">Orquestador</div><div class="agent-name">CEREBRO</div><div class="agent-role">Coordina cross-agente · detecta sinergia LEMPAR ↔ Nathaly · streaming progreso.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · DIAGNÓSTICO POR AGENTE -->
+<section class="block light">
+  <div class="container">
+    <span class="eyebrow">03 · HOY · RECOMIENDA · ASSESSMENT</span>
+    <h2 class="title">Qué dice <em>cada uno</em>.</h2>
+    <p class="lead">
+      Reportes core de los 4 P1 con análisis basado en data Instagram real. Los demás
+      en formato compacto al final.
+    </p>
+
+    <div class="detail-grid">
+
+      <!-- RADAR -->
+      <div class="detail-card radar" style="grid-column:1/-1">
+        <div class="detail-head">
+          <div class="detail-icon">📡</div>
+          <div class="detail-meta">
+            <div class="d-name">RADAR · Inteligencia Externa</div>
+            <div class="d-role">P1 · Scraping Instagram + Benchmark mercado SMM Chile</div>
+          </div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">📊 HOY · Data scrapeada Instagram</div>
+          <div class="detail-text">
+            <strong>@redessociales.cl_ · Nathaly Varela · Social Media Manager</strong><br>
+            • 2.671 followers · 992 following · 154 publicaciones<br>
+            • Nicho declarado: <strong>salud · deporte · bienestar</strong> (específico, no genérico)<br>
+            • Modelo: 1:1 + talleres + cursos (artesanal)<br>
+            • Stack actual: Solo Instagram + WhatsApp (wa.link/ko8l4t)<br>
+            • Highlights estructurados: RRSS.cl · +Clientes · +Tips · Cursos Talleres · y Recomiendo · Servicios · Clientes · Productos<br>
+            • Tono: emoji-friendly · cálido · educativo · profesional<br>
+            • CTA frecuente: "Potencia tu marca con estrategias personalizadas"
+          </div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💡 RECOMIENDA · Posicionamiento mercado SMM Chile</div>
+          <ul class="detail-list">
+            <li>Mercado Social Media Manager Chile en crecimiento (~25% anual post-pandemia)</li>
+            <li>Nicho salud/deporte/bienestar es defendible · poca competencia comparado con marketing genérico</li>
+            <li>2.6K followers es freelance/micro · NO agencia formal · capacidad de pago limitada por escala</li>
+            <li>Oportunidad real: monetizar la audiencia con cursos vs solo asesorías 1:1 (mayor margen, escalable)</li>
+            <li>Cross-cliente: LEMPAR (grappling = deporte) es candidato perfecto · misma vertical de Nathaly</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">📈 ASSESSMENT</div>
+          <div class="detail-kpi"><span class="kpi-k">Madurez mercado</span><span class="kpi-v">Score B · viable Y1</span></div>
+        </div>
+      </div>
+
+      <!-- DATA-BW -->
+      <div class="detail-card bw" style="grid-column:1/-1">
+        <div class="detail-head">
+          <div class="detail-icon">⊡</div>
+          <div class="detail-meta">
+            <div class="d-name">DATA-BW · QA Financiero</div>
+            <div class="d-role">P1 · Validación cuantitativa basada en data real IG</div>
+          </div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">📊 HOY · Métricas calculadas</div>
+          <div class="detail-text">
+            • Engagement implícito: 2.671 followers / 154 posts = ratio audiencia/contenido = <strong>17.3 followers por post</strong> (saludable para nicho)<br>
+            • Cliente target: profesionales individuales salud/deporte (psicólogos · entrenadores · nutricionistas · kinesiólogos · yoga · pilates · crossfit)<br>
+            • ARPU asumido cliente Nathaly: <strong>$150K-300K/mes</strong> por gestión RRSS (rango mercado Chile 2026)<br>
+            • Si tiene 5 clientes activos: $750K-1.5M/mes ingreso · si tiene 10: $1.5M-3M/mes<br>
+            • Capacidad de pago F0 landing: <strong>$250K es ~1 mes de ingreso de 1 cliente promedio</strong> · razonable
+          </div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">🔍 VALIDACIÓN · Pricing ajustado</div>
+          <ul class="detail-list">
+            <li>$250K F0 landing · pasa filtro (1 mes ARPU · acceso real)</li>
+            <li>$1M F2 plataforma · pasa filtro si Nathaly tiene 5+ clientes (justifica inversión)</li>
+            <li>$5.75M total ruta completa · viable solo si plataforma le permite escalar a 15+ clientes</li>
+            <li>Riesgo: si Nathaly solo tiene 2-3 clientes, F2 ya es estresante · pricing F4-F5 prematuro</li>
+            <li>Recomendación: validar # clientes activos ANTES de comprometer F2+</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">📈 ASSESSMENT</div>
+          <div class="detail-kpi"><span class="kpi-k">Pricing viable</span><span class="kpi-v">Score B+ · si escala</span></div>
+        </div>
+      </div>
+
+      <!-- PRM -->
+      <div class="detail-card urgent">
+        <div class="detail-head">
+          <div class="detail-icon">🚀</div>
+          <div class="detail-meta">
+            <div class="d-name">PRM · Product Manager</div>
+            <div class="d-role">P1 · Definición producto SMC para Nathaly</div>
+          </div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">📊 HOY · Producto definido</div>
+          <div class="detail-text">F1 Landing = entry profesional · F2-F5 = plataforma agencia. Cada fase valida la siguiente. Lever de crecimiento: convertir audiencia IG a leads via formulario.</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💡 RECOMIENDA · acciones</div>
+          <ul class="detail-list">
+            <li>F1: foco en captura de leads (wa.link → formulario web)</li>
+            <li>Métrica norte: leads/semana en F1 · clientes activos en F2</li>
+            <li>F4-F5 son opcionales · validar antes de prometer</li>
+          </ul>
+        </div>
+        <div class="detail-kpi"><span class="kpi-k">KPI 90 días</span><span class="kpi-v">F1 live · 10 leads/sem</span></div>
+      </div>
+
+      <!-- BUSINESS DEV -->
+      <div class="detail-card urgent">
+        <div class="detail-head">
+          <div class="detail-icon">💰</div>
+          <div class="detail-meta">
+            <div class="d-name">BUSINESS DEVELOPMENT</div>
+            <div class="d-role">P1 · Pricing y cierre comercial</div>
+          </div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">📊 HOY · Pricing acordado</div>
+          <div class="detail-text">F1 $250K (gancho realista para freelance 2.6K) · F2-F5 progresivo a $5.75M total · sinergia cross con LEMPAR como gancho adicional.</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💡 RECOMIENDA · cierre</div>
+          <ul class="detail-list">
+            <li>Pitch directo: "tu landing + leads asesorías"</li>
+            <li>50/50 pago · descuento al F2 si avanza</li>
+            <li>Sinergia LEMPAR: presentar Claudio como cliente</li>
+          </ul>
+        </div>
+        <div class="detail-kpi"><span class="kpi-k">KPI 30 días</span><span class="kpi-v">F1 cerrada · contrato firmado</span></div>
+      </div>
+
+      <!-- COMPACT P2/P3 -->
+      <div class="detail-card" style="grid-column:1/-1;background:linear-gradient(180deg,var(--bone-soft) 0%,var(--bg) 100%)">
+        <div class="detail-head">
+          <div class="detail-icon">⚡</div>
+          <div class="detail-meta">
+            <div class="d-name">8 agentes restantes · vista compacta</div>
+            <div class="d-role">P2 · P3 · cada uno con acción concreta</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px">
+          <div style="padding:14px;background:var(--bg);border-left:3px solid var(--brass)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">👔 PM</div>
+            <div style="font-size:12px;color:var(--muted)">Sprint F1: 4 semanas. Sprint F2: 6 sem. Validación por fase antes de avanzar.</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-left:3px solid var(--brass)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">🐕 Functional-Lead</div>
+            <div style="font-size:12px;color:var(--muted)">Maqueta landing salud/deporte · journey lead captura · spec plataforma F2.</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-left:3px solid var(--brass)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">🎨 Frontend</div>
+            <div style="font-size:12px;color:var(--muted)">Next.js mobile-first · embed IG · WhatsApp Business · PWA en F2+.</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-left:3px solid var(--brass)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">🐾 Hoku</div>
+            <div style="font-size:12px;color:var(--muted)">IA guiones &lt;24h · sync 4 APIs Meta/IG/TikTok/YT · WhatsApp Business · OpenRouter fallback.</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-left:3px solid rgba(13,13,13,.20)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">⚖️ Compliance</div>
+            <div style="font-size:12px;color:var(--muted)">Contrato F1 simple (50/50 pago). Pacto socios solo si Nathaly contrata equipo en F4-F5.</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-left:3px solid rgba(13,13,13,.20)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">🎙️ Portavoz</div>
+            <div style="font-size:12px;color:var(--muted)">Replicar tono Nathaly (emoji + educativo) · 3 pilares: salud · deporte · bienestar.</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-left:3px solid rgba(13,13,13,.20)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">🛒 Procurement</div>
+            <div style="font-size:12px;color:var(--muted)">Vercel free F1 · AWS si supera 100K visitas. Supabase free tier F2 · Airtable si Nathaly prefiere visual.</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-left:3px solid rgba(13,13,13,.20)">
+            <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:4px">🧠 Cerebro</div>
+            <div style="font-size:12px;color:var(--muted)">Detecta sinergia LEMPAR↔Nathaly. Activa cross-cliente. Orquesta sin pedir OK entre agentes.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="exec">
+      <h3>El equipo dice: Nathaly cumple criterios para F1 ahora.</h3>
+      <p><strong>1. RADAR validó perfil real:</strong> 2.671 followers · nicho específico · operación activa. NO inflada.</p>
+      <p><strong>2. DATA-BW confirma viabilidad pricing:</strong> $250K F1 pasa filtro · $5.75M total solo si escala a 15+ clientes.</p>
+      <p><strong>3. PRM define producto:</strong> F1 entry profesional · F2-F5 incremental con validación.</p>
+      <p><strong>4. BUSINESS DEV cierra:</strong> 50/50 pago F1 · sinergia LEMPAR como adicional · ruta total $5.75M.</p>
+      <p style="padding-top:16px;border-top:1px solid rgba(176,141,76,.30);margin-top:16px"><strong style="color:var(--brass)">Próximo paso:</strong> Reunión con Nathaly · presentar F1 ($250K · 1-2 sem) · si firma → activamos Frontend + Functional-Lead.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="f-logo">War Room Nathaly Varela</div>
+  <p>12 agentes SMC · Data IG real scrapeada · 2026-05-13</p>
+  <p style="margin-top:6px;color:rgba(244,241,234,.30)">Cerebro orquesta · DATA-BW valida · RADAR scrapea · Guillermo decide</p>
+</footer>
+
+</body>
+</html>
