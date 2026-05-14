@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plataforma de Operación Digital — Agencia Nathaly</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A78BFA;
+    --purple-dark: #5B21B6;
+    --gold: #D4A574;
+    --gold-light: #E8C9A0;
+    --bg: #0F0A1A;
+    --bg-card: rgba(255,255,255,0.04);
+    --text: #F1F0F5;
+    --text-muted: #9CA3AF;
+    --gradient-accent: linear-gradient(135deg, var(--purple), var(--gold));
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+  /* ── Nav ── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(20px); background: rgba(15,10,26,0.85); border-bottom: 1px solid rgba(124,58,237,0.15); padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+  nav .logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  nav .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  nav .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s; }
+  nav .nav-links a:hover { color: var(--purple-light); }
+
+  /* ── Sections ── */
+  section { min-height: 100vh; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; }
+
+  /* ── Hero ── */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; padding-top: 4rem; }
+  .hero::before { content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+  .hero .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 50px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); font-size: 0.8rem; color: var(--purple-light); font-weight: 500; margin-bottom: 2rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
+  .hero h1 span { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.7; }
+  .hero .client-info { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; justify-content: center; }
+  .hero .client-info .stat { text-align: center; }
+  .hero .client-info .stat-number { font-size: 2rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .client-info .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; line-height: 1.4; }
+
+  /* ── Section headers ── */
+  .section-label { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--purple-light); font-weight: 600; margin-bottom: 1rem; }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--gradient-accent); border-radius: 1px; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
+  .section-desc { color: var(--text-muted); font-size: 1.05rem; max-width: 650px; margin-bottom: 3rem; line-height: 1.7; }
+
+  /* ── Feature block ── */
+  .feature-block { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 5rem; }
+  .feature-block.reverse { direction: rtl; }
+  .feature-block.reverse > * { direction: ltr; }
+  .feature-block .feature-text h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .feature-block .feature-text p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem; }
+  .feature-block .feature-text ul { list-style: none; padding: 0; }
+  .feature-block .feature-text ul li { padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.6rem; }
+  .feature-block .feature-text ul li::before { content: '✓'; color: var(--purple-light); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+
+  /* ── UI Mockup ── */
+  .feature-img { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.08); position: relative; background: rgba(255,255,255,0.03); min-height: 280px; }
+  .feature-img .img-label { position: absolute; bottom: 12px; left: 12px; padding: 0.3rem 0.8rem; background: rgba(15,10,26,0.85); backdrop-filter: blur(10px); border-radius: 8px; font-size: 0.7rem; color: var(--purple-light); font-weight: 600; border: 1px solid rgba(124,58,237,0.2); }
+  .mock-chrome { background: rgba(255,255,255,0.05); padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .mock-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .mock-dot.r { background: #FF5F57; }
+  .mock-dot.y { background: #FFBD2E; }
+  .mock-dot.g { background: #28CA41; }
+  .mock-url { flex: 1; background: rgba(255,255,255,0.05); border-radius: 5px; height: 22px; padding: 0 10px; display: flex; align-items: center; font-size: 10px; color: rgba(255,255,255,0.3); font-family: monospace; }
+  .mock-body { padding: 16px; }
+  .mock-row { display: flex; gap: 10px; margin-bottom: 10px; }
+  .mock-card-sm { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 12px; flex: 1; }
+  .mc-num { font-size: 1.3rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .mc-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+  .mock-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 9px; font-weight: 600; }
+  .mock-pill.ok { background: rgba(74,222,128,0.15); color: #4ADE80; }
+  .mock-pill.warn { background: rgba(251,191,36,0.15); color: #FCD34D; }
+  .mock-pill.danger { background: rgba(239,68,68,0.15); color: #F87171; }
+  .mock-list-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 10px; color: var(--text-muted); }
+  .mock-list-item:last-child { border-bottom: none; }
+  .mock-tag { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 8px; font-weight: 700; background: rgba(124,58,237,0.15); color: var(--purple-light); }
+  .mock-textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 10px; font-size: 9.5px; color: var(--text-muted); line-height: 1.55; margin-top: 8px; white-space: pre-wrap; }
+  .mock-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; background: linear-gradient(135deg,var(--purple),var(--gold)); border-radius: 6px; font-size: 9px; font-weight: 700; color: white; margin-top: 10px; }
+  .mock-chart-bar { display: flex; align-items: flex-end; gap: 5px; height: 70px; margin-top: 10px; }
+  .mock-bar-col { flex: 1; border-radius: 4px 4px 0 0; background: rgba(124,58,237,0.25); }
+  .mock-bar-col.hi { background: linear-gradient(180deg,var(--purple),rgba(124,58,237,0.15)); }
+  .mock-bar-col.gold { background: linear-gradient(180deg,var(--gold),rgba(212,165,116,0.15)); }
+  .mock-cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-top: 10px; }
+  .mock-cal-day { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.03); font-size: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+  .mock-cal-day.has { background: rgba(124,58,237,0.2); color: var(--purple-light); font-weight: 600; }
+  .mock-cal-day.gap { background: rgba(239,68,68,0.12); color: #F87171; font-weight: 600; }
+
+  /* ── Full-width img area ── */
+  .full-img { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 60px rgba(0,0,0,0.5); margin: 2rem 0 3rem; position: relative; background: rgba(255,255,255,0.03); }
+  .full-img .img-label { position: absolute; bottom: 16px; left: 16px; padding: 0.35rem 0.9rem; background: rgba(15,10,26,0.85); backdrop-filter: blur(10px); border-radius: 8px; font-size: 0.75rem; color: var(--purple-light); font-weight: 600; border: 1px solid rgba(124,58,237,0.2); }
+
+  /* ── Cards grid ── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .info-card { padding: 2rem; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; transition: border-color 0.3s, transform 0.3s; }
+  .info-card:hover { border-color: rgba(124,58,237,0.25); transform: translateY(-2px); }
+  .info-card .card-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(124,58,237,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1rem; }
+  .info-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .info-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── Roles table ── */
+  .roles-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+  .roles-table th { text-align: left; padding: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--purple-light); border-bottom: 1px solid rgba(124,58,237,0.2); font-weight: 600; }
+  .roles-table td { padding: 0.85rem 1rem; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-muted); }
+  .roles-table tr:hover td { color: var(--text); }
+  .role-badge { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+  .role-badge.duena { background: rgba(124,58,237,0.15); color: var(--purple-light); }
+  .role-badge.ejecutivo { background: rgba(59,130,246,0.15); color: #60A5FA; }
+  .role-badge.freelance { background: rgba(212,165,116,0.15); color: var(--gold-light); }
+  .role-badge.cliente { background: rgba(34,197,94,0.15); color: #4ADE80; }
+
+  /* ── Tech grid ── */
+  .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px,1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .tech-item { padding: 1.25rem; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; text-align: center; transition: border-color 0.3s; }
+  .tech-item:hover { border-color: rgba(124,58,237,0.25); }
+  .tech-item .tech-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .tech-item .tech-desc { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ── Pipeline steps ── */
+  .pipeline-steps { display: flex; margin: 2rem 0; }
+  .pip-step { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); padding: 1rem 0.75rem; position: relative; text-align: center; }
+  .pip-step:first-child { border-radius: 12px 0 0 12px; }
+  .pip-step:last-child { border-radius: 0 12px 12px 0; }
+  .pip-step:not(:last-child) { border-right: none; }
+  .pip-step:not(:last-child)::after { content: '›'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); color: var(--purple-light); font-size: 1.3rem; z-index: 1; background: var(--bg); padding: 0 2px; }
+  .pip-num { font-size: 0.65rem; font-weight: 700; color: var(--purple-light); text-transform: uppercase; letter-spacing: 0.08em; }
+  .pip-name { font-size: 0.875rem; font-weight: 600; margin-top: 0.25rem; line-height: 1.3; }
+  .pip-actor { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  /* ── Roadmap ── */
+  .roadmap { position: relative; padding-left: 2rem; margin-top: 2rem; }
+  .roadmap::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--purple), var(--gold), rgba(255,255,255,0.05)); }
+  .roadmap-item { position: relative; padding: 1.25rem 0 1.25rem 1.5rem; }
+  .roadmap-item::before { content: ''; position: absolute; left: -2rem; top: 1.6rem; width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--purple); background: var(--bg); }
+  .roadmap-item.done::before { background: var(--purple); box-shadow: 0 0 10px rgba(124,58,237,0.4); }
+  .roadmap-item.current::before { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 10px rgba(212,165,116,0.4); }
+  .roadmap-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .roadmap-item p { font-size: 0.85rem; color: var(--text-muted); }
+  .roadmap-item .phase-tag { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; }
+  .phase-tag.live { background: rgba(34,197,94,0.15); color: #4ADE80; }
+  .phase-tag.next { background: rgba(251,191,36,0.15); color: #FCD34D; }
+  .phase-tag.planned { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+
+  /* ── Pricing ── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .price-card { padding: 2rem; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; position: relative; transition: transform 0.3s, border-color 0.3s; }
+  .price-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.3); }
+  .price-card.featured { border-color: rgba(124,58,237,0.4); background: linear-gradient(135deg, rgba(124,58,237,0.08), var(--bg-card)); }
+  .price-card .featured-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.7rem; font-weight: 700; background: var(--gradient-accent); color: #fff; white-space: nowrap; }
+  .price-card .price-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--purple-light); font-weight: 600; margin-bottom: 0.5rem; }
+  .price-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .price-num { font-size: 3rem; font-weight: 800; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+  .price-unit { font-size: 0.9rem; color: var(--text-muted); }
+  .price-card ul { list-style: none; margin-top: 1.5rem; }
+  .price-card ul li { font-size: 0.875rem; color: var(--text-muted); padding: 0.4rem 0; display: flex; align-items: flex-start; gap: 0.6rem; }
+  .price-card ul li::before { content: '✓'; color: var(--purple-light); font-weight: 700; flex-shrink: 0; }
+  .price-card .price-note { margin-top: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.25); font-style: italic; }
+
+  /* ── Footer ── */
+  footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 4rem; }
+  footer .brand { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+  footer p { font-size: 0.85rem; color: var(--text-muted); }
+  footer a { color: var(--purple-light); text-decoration: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    section { padding: 4rem 1.25rem; }
+    .feature-block { grid-template-columns: 1fr; gap: 2rem; }
+    .feature-block.reverse { direction: ltr; }
+    .hero .client-info { flex-direction: column; gap: 1.5rem; align-items: center; }
+    nav .nav-links { display: none; }
+    .roles-table { font-size: 0.8rem; }
+    .pipeline-steps { flex-wrap: wrap; }
+    .pip-step { flex: 1 1 40%; border-radius: 10px !important; border: 1px solid rgba(255,255,255,0.06) !important; }
+    .pip-step::after { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .animate { opacity: 0; animation: fadeUp 0.6s ease-out forwards; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">Smart Connection</div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#plataforma">Plataforma</a></li>
+    <li><a href="#automatizaciones">Automatizaciones</a></li>
+    <li><a href="#usuarios">Usuarios</a></li>
+    <li><a href="#tecnologia">Tecnolog&iacute;a</a></li>
+    <li><a href="#inversion">Inversi&oacute;n</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="inicio">
+  <div class="badge animate">Propuesta de Plataforma &bull; Mayo 2026</div>
+  <h1 class="animate delay-1">Plataforma de<br><span>Operaci&oacute;n Digital</span></h1>
+  <p class="subtitle animate delay-2">
+    Sistema web dise&ntilde;ado a medida para <strong>Agencia Nathaly</strong>. Centraliza guiones, m&eacute;tricas, planificaci&oacute;n de contenido y finanzas por cliente &mdash; todo automatizado, todo visible desde una pantalla.
+  </p>
+  <div class="client-info animate delay-3">
+    <div class="stat">
+      <div class="stat-number">8h</div>
+      <div class="stat-label">&rarr; menos de 1h<br>Reportes semanales</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">3&ndash;5d</div>
+      <div class="stat-label">&rarr; menos de 24h<br>Brief a gui&oacute;n</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">~20%</div>
+      <div class="stat-label">&rarr; menos de 5%<br>Cuentas inactivas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">6w</div>
+      <div class="stat-label">Primera versi&oacute;n<br>en producci&oacute;n</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PLATAFORMA ═══════════ -->
+<section id="plataforma">
+  <span class="section-label">Vista Central</span>
+  <h2>Un solo lugar para toda la agencia</h2>
+  <p class="section-desc">
+    Dashboard operativo en tiempo real: estado de cuentas, alertas de publicaci&oacute;n, tareas del d&iacute;a y m&eacute;tricas del mes. Todo visible en los primeros 10 segundos.
+  </p>
+
+  <div class="feature-block">
+    <div class="feature-text">
+      <h3>Dashboard por cliente</h3>
+      <p>Vista consolidada de todas las cuentas activas. Cada cliente tiene su tarjeta con sem&aacute;foro de estado, fecha de &uacute;ltima publicaci&oacute;n y alerta si lleva m&aacute;s de 5 d&iacute;as sin contenido.</p>
+      <ul>
+        <li>Sem&aacute;foro verde / amarillo / rojo por cuenta</li>
+        <li>Alerta autom&aacute;tica si cuenta inactiva +5 d&iacute;as</li>
+        <li>M&eacute;tricas del mes al lado del nombre del cliente</li>
+        <li>Acceso r&aacute;pido al calendario editorial</li>
+        <li>Vista de carga de trabajo por ejecutivo</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="mock-chrome">
+        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+        <div class="mock-url">app.agencianathaly.cl/dashboard</div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-row">
+          <div class="mock-card-sm"><div class="mc-num">12</div><div class="mc-label">Clientes activos</div></div>
+          <div class="mock-card-sm"><div class="mc-num">3</div><div class="mc-label">Alertas hoy</div></div>
+          <div class="mock-card-sm"><div class="mc-num">8</div><div class="mc-label">Gui&oacute;nes pendientes</div></div>
+        </div>
+        <div class="mock-list-item"><span>RestaurAnte Bellavista</span><span class="mock-pill ok">Al d&iacute;a</span></div>
+        <div class="mock-list-item"><span>Cl&iacute;nica Derma Sur</span><span class="mock-pill warn">Hace 4 d&iacute;as</span></div>
+        <div class="mock-list-item"><span>Inmobiliaria Torres</span><span class="mock-pill danger">7 d&iacute;as sin publicar</span></div>
+        <div class="mock-list-item"><span>Gym FitZone</span><span class="mock-pill ok">Al d&iacute;a</span></div>
+        <div class="mock-list-item"><span>Caf&eacute; Origen</span><span class="mock-pill ok">Al d&iacute;a</span></div>
+      </div>
+      <div class="img-label">Dashboard &middot; Estado de Cuentas</div>
+    </div>
+  </div>
+
+  <div class="feature-block reverse">
+    <div class="feature-text">
+      <h3>Acceso con rol personalizado</h3>
+      <p>Cada persona del equipo ve exactamente lo que le corresponde. La due&ntilde;a ve todo. Los ejecutivos ven sus cuentas. Los clientes solo ven su informaci&oacute;n.</p>
+      <ul>
+        <li>Acceso con email, sin contrase&ntilde;as</li>
+        <li>Redirecci&oacute;n autom&aacute;tica seg&uacute;n rol</li>
+        <li>Portal separado para clientes externos</li>
+        <li>Registro de &uacute;ltimo acceso por usuario</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="mock-chrome">
+        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+        <div class="mock-url">app.agencianathaly.cl/login</div>
+      </div>
+      <div class="mock-body" style="text-align:center;padding:32px 24px">
+        <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,#7C3AED,#D4A574);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:22px">Agencia Nathaly</div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.3);text-align:left;margin-bottom:10px">nathaly@agencianathaly.cl</div>
+        <div style="background:linear-gradient(135deg,#7C3AED,#D4A574);border-radius:8px;padding:11px;font-size:11px;font-weight:700;color:white">Ingresar con email &rarr;</div>
+        <div style="margin-top:16px;font-size:9px;color:rgba(255,255,255,0.2)">Solo emails autorizados tienen acceso</div>
+      </div>
+      <div class="img-label">Autenticaci&oacute;n &middot; Sin contrase&ntilde;as</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ AUTOMATIZACIONES: GUIONES ═══════════ -->
+<section id="automatizaciones">
+  <span class="section-label">IA Generativa</span>
+  <h2>De brief a gui&oacute;n<br>en menos de 24 horas</h2>
+  <p class="section-desc">
+    El cliente env&iacute;a el brief. La plataforma genera el borrador con Groq&nbsp;+&nbsp;Claude. El ejecutivo ajusta. El cliente aprueba dentro del sistema &mdash; sin WhatsApp, sin correos perdidos.
+  </p>
+
+  <div class="pipeline-steps">
+    <div class="pip-step"><div class="pip-num">01</div><div class="pip-name">Brief del cliente</div><div class="pip-actor">Cliente / Ejecutivo</div></div>
+    <div class="pip-step"><div class="pip-num">02</div><div class="pip-name">IA genera borrador</div><div class="pip-actor">Groq + Claude</div></div>
+    <div class="pip-step"><div class="pip-num">03</div><div class="pip-name">Revisi&oacute;n creativa</div><div class="pip-actor">Ejecutivo de cuenta</div></div>
+    <div class="pip-step"><div class="pip-num">04</div><div class="pip-name">Aprobaci&oacute;n</div><div class="pip-actor">Cliente (portal propio)</div></div>
+    <div class="pip-step"><div class="pip-num">05</div><div class="pip-name">Archivo + historial</div><div class="pip-actor">Sistema autom&aacute;tico</div></div>
+  </div>
+
+  <div class="feature-block" style="margin-top:2rem">
+    <div class="feature-text">
+      <h3>Gui&oacute;nes generados con contexto de marca</h3>
+      <p>Cada cliente tiene un perfil: tono, palabras clave, formatos preferidos y ejemplos aprobados anteriores. La IA usa ese contexto para generar un borrador que ya suena a la marca.</p>
+      <ul>
+        <li>Perfil de marca por cliente (tono, keywords, formato)</li>
+        <li>Generaci&oacute;n con historial de gui&oacute;nes aprobados</li>
+        <li>Plantillas por tipo: Reels, Stories, Carrusel, TikTok</li>
+        <li>Aprobaci&oacute;n con un click &mdash; no por WhatsApp</li>
+        <li>Versiones guardadas con qui&eacute;n aprob&oacute; y cu&aacute;ndo</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="mock-chrome">
+        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+        <div class="mock-url">app.agencianathaly.cl/guiones/nuevo</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size:10px;color:var(--text-muted);margin-bottom:8px">Cliente: <strong style="color:var(--text)">RestaurAnte Bellavista</strong> &nbsp;&middot;&nbsp; <span class="mock-tag">Reels 30s</span></div>
+        <div style="font-size:9px;color:var(--text-muted);margin-bottom:4px">Brief:</div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:8px;font-size:9px;color:var(--text-muted);margin-bottom:10px">"Mostrar nueva carta de verano, destacar el ceviche. Tono fresco, joven."</div>
+        <div style="font-size:9px;color:var(--purple-light);margin-bottom:6px;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block"></span> Generando con contexto de marca...</div>
+        <div class="mock-textarea">🎬 Hook: "¿Sabías que hay un lugar donde el verano sabe a ceviche?"
+
+📍 Escena 1 (3s): Close-up del ceviche llegando a la mesa...
+🎵 Música: Lo-fi tropical, BPM 95
+✍️ CTA: "Reserva en el bio →"</div>
+        <div class="mock-btn">✨ Aprobar gui&oacute;n</div>
+      </div>
+      <div class="img-label">M&oacute;dulo de Gui&oacute;nes &middot; IA Generativa</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MÉTRICAS ═══════════ -->
+<section>
+  <span class="section-label">Sincronizaci&oacute;n Autom&aacute;tica</span>
+  <h2>Reportes que se generan solos</h2>
+  <p class="section-desc">
+    Conectado con Meta Graph API, TikTok Business API y YouTube Data API. Las m&eacute;tricas se sincronizan cada 24 horas &mdash; sin bajar Excel, sin copiar y pegar.
+  </p>
+
+  <div class="feature-block reverse">
+    <div class="feature-text">
+      <h3>M&eacute;tricas de todas las redes en un lugar</h3>
+      <p>El reporte del lunes deja de existir como tarea manual. La plataforma ya tiene los n&uacute;meros listos: alcance, impresiones, engagement, seguidores nuevos &mdash; por cliente, por red, por per&iacute;odo.</p>
+      <ul>
+        <li>Meta (Instagram + Facebook): alcance, engagement, seguidores</li>
+        <li>TikTok: vistas, shares, engagement por video</li>
+        <li>YouTube: reproducciones, retenci&oacute;n, suscriptores</li>
+        <li>Comparativa: esta semana vs semana anterior</li>
+        <li>Exportar PDF del reporte con un click</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="mock-chrome">
+        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+        <div class="mock-url">app.agencianathaly.cl/metricas/gym-fitzone</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size:10px;font-weight:600;margin-bottom:8px">Gym FitZone &middot; <span style="color:var(--text-muted);font-weight:400">Mayo 2026</span></div>
+        <div class="mock-row">
+          <div class="mock-card-sm"><div class="mc-num" style="font-size:1rem">42.3K</div><div class="mc-label">Alcance / mes</div><div style="font-size:8px;color:#4ADE80;margin-top:3px">↑ +18% vs mes ant.</div></div>
+          <div class="mock-card-sm"><div class="mc-num" style="font-size:1rem">6.8%</div><div class="mc-label">Engagement</div><div style="font-size:8px;color:#4ADE80;margin-top:3px">↑ +1.2pp</div></div>
+        </div>
+        <div class="mock-chart-bar">
+          <div class="mock-bar-col" style="height:45%"></div>
+          <div class="mock-bar-col" style="height:60%"></div>
+          <div class="mock-bar-col hi" style="height:80%"></div>
+          <div class="mock-bar-col" style="height:55%"></div>
+          <div class="mock-bar-col gold" style="height:90%"></div>
+          <div class="mock-bar-col" style="height:70%"></div>
+          <div class="mock-bar-col hi" style="height:85%"></div>
+        </div>
+        <div style="font-size:8px;color:var(--text-muted);margin-top:4px;display:flex;justify-content:space-between"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+      </div>
+      <div class="img-label">M&eacute;tricas &middot; Sincronizaci&oacute;n API</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CALENDARIO ═══════════ -->
+<section>
+  <span class="section-label">Planificaci&oacute;n Editorial</span>
+  <h2>El contenido de toda la agencia en un calendario</h2>
+  <p class="section-desc">
+    Vista mensual por cliente con arrastrar y soltar. Alertas cuando hay brechas de contenido. La due&ntilde;a ve toda la agencia; cada ejecutivo ve sus cuentas.
+  </p>
+
+  <div class="feature-block">
+    <div class="feature-text">
+      <h3>Planificaci&oacute;n visual por cuenta</h3>
+      <p>Cada cuenta tiene su calendario con posts programados, en revisi&oacute;n y publicados. Arrastra para reprogramar. El sistema alerta cuando una cuenta lleva m&aacute;s de 5 d&iacute;as sin contenido agendado.</p>
+      <ul>
+        <li>Vista mensual y semanal por cuenta</li>
+        <li>Drag &amp; drop para reprogramar</li>
+        <li>Alerta autom&aacute;tica si hay brecha de +5 d&iacute;as</li>
+        <li>Estados: borrador / en revisi&oacute;n / aprobado / publicado</li>
+        <li>Vista de carga de trabajo por ejecutivo</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="mock-chrome">
+        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+        <div class="mock-url">app.agencianathaly.cl/calendario</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size:10px;font-weight:600;margin-bottom:6px">Mayo 2026 &middot; <span style="color:var(--text-muted);font-weight:400">Cl&iacute;nica Derma Sur</span></div>
+        <div style="font-size:8px;color:var(--text-muted);display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px;text-align:center"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+        <div class="mock-cal-grid">
+          <div class="mock-cal-day"></div><div class="mock-cal-day">1</div>
+          <div class="mock-cal-day has">2</div><div class="mock-cal-day">3</div>
+          <div class="mock-cal-day has">4</div><div class="mock-cal-day">5</div>
+          <div class="mock-cal-day">6</div><div class="mock-cal-day has">7</div>
+          <div class="mock-cal-day">8</div><div class="mock-cal-day has">9</div>
+          <div class="mock-cal-day">10</div><div class="mock-cal-day">11</div>
+          <div class="mock-cal-day gap">12</div><div class="mock-cal-day gap">13</div>
+          <div class="mock-cal-day has">14</div><div class="mock-cal-day">15</div>
+          <div class="mock-cal-day has">16</div><div class="mock-cal-day">17</div>
+          <div class="mock-cal-day has">18</div><div class="mock-cal-day">19</div>
+          <div class="mock-cal-day">20</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:8px;align-items:center">
+          <div style="width:8px;height:8px;border-radius:2px;background:rgba(124,58,237,0.3)"></div><span style="font-size:8px;color:var(--text-muted)">Publicado</span>
+          <div style="width:8px;height:8px;border-radius:2px;background:rgba(239,68,68,0.2)"></div><span style="font-size:8px;color:var(--text-muted)">Brecha detectada</span>
+        </div>
+      </div>
+      <div class="img-label">Calendario &middot; Vista Editorial</div>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="margin-top:0">
+    <div class="info-card"><div class="card-icon">💰</div><h4>Margen por cliente</h4><p>Cuánto factura vs cuánto cuesta atenderlo. Detecta las cuentas que consumen más recursos de los que generan.</p></div>
+    <div class="info-card"><div class="card-icon">⏱️</div><h4>Horas por cuenta</h4><p>El equipo registra tiempo por cliente. Al final del mes sabes cuántas horas dedicaste a cada cuenta.</p></div>
+    <div class="info-card"><div class="card-icon">📊</div><h4>Estado de cobranza</h4><p>Facturas emitidas, pendientes y vencidas por cliente. Alertas automáticas antes del vencimiento.</p></div>
+    <div class="info-card"><div class="card-icon">📄</div><h4>Reporte mensual auto</h4><p>El reporte financiero del mes se genera solo. Exportable en PDF para la dueña o el contador.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ USUARIOS ═══════════ -->
+<section id="usuarios">
+  <span class="section-label">Administraci&oacute;n</span>
+  <h2>Gesti&oacute;n de Usuarios</h2>
+  <p class="section-desc">
+    Panel de administraci&oacute;n para gestionar accesos del equipo y clientes. Cada persona tiene un rol que determina exactamente qu&eacute; puede ver y hacer en la plataforma.
+  </p>
+
+  <div class="feature-block reverse">
+    <div class="feature-text">
+      <h3>Crear usuarios en un click</h3>
+      <p>El formulario permite definir nombre, email, rol y cuentas asignadas. El nuevo usuario puede acceder inmediatamente con su email.</p>
+      <ul>
+        <li>Cuatro roles: Due&ntilde;a, Ejecutivo, Freelance, Cliente</li>
+        <li>Asignaci&oacute;n de cuentas por ejecutivo</li>
+        <li>Activar / desactivar acceso al sistema</li>
+        <li>Registro de &uacute;ltimo acceso por usuario</li>
+        <li>Portal separado para clientes externos</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="mock-chrome">
+        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+        <div class="mock-url">app.agencianathaly.cl/admin/usuarios</div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-list-item"><span><strong style="color:var(--text)">Nathaly P&eacute;rez</strong></span><span class="mock-pill ok">Due&ntilde;a</span></div>
+        <div class="mock-list-item"><span>Camila Rojas</span><span class="mock-tag">Ejecutivo</span></div>
+        <div class="mock-list-item"><span>Felipe Moreno</span><span class="mock-tag">Ejecutivo</span></div>
+        <div class="mock-list-item"><span>Diego Campos</span><span style="font-size:8px;background:rgba(212,165,116,.15);color:#E8C9A0;padding:1px 6px;border-radius:4px;font-weight:700">Freelance</span></div>
+        <div class="mock-list-item"><span>Gym FitZone (cliente)</span><span style="font-size:8px;background:rgba(34,197,94,.15);color:#4ADE80;padding:1px 6px;border-radius:4px;font-weight:700">Cliente</span></div>
+        <div style="margin-top:12px;text-align:right"><div style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:linear-gradient(135deg,#7C3AED,#D4A574);border-radius:6px;font-size:9px;font-weight:700;color:white">+ Nuevo usuario</div></div>
+      </div>
+      <div class="img-label">Admin &middot; Gesti&oacute;n de Usuarios</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:3rem;margin-bottom:0.5rem;">Estructura de roles</h3>
+  <p class="section-desc" style="margin-bottom:1.5rem">Cada rol tiene permisos espec&iacute;ficos seg&uacute;n la funci&oacute;n real dentro de la agencia.</p>
+  <table class="roles-table">
+    <thead><tr><th>Rol</th><th>Acceso</th><th>Puede hacer</th></tr></thead>
+    <tbody>
+      <tr><td><span class="role-badge duena">Due&ntilde;a</span></td><td>Todo el sistema</td><td>Gesti&oacute;n total: usuarios, finanzas, clientes, m&eacute;tricas, gui&oacute;nes, reportes globales</td></tr>
+      <tr><td><span class="role-badge ejecutivo">Ejecutivo de Cuenta</span></td><td>Sus cuentas: gui&oacute;nes, m&eacute;tricas, calendario, tareas</td><td>Crear gui&oacute;nes, gestionar calendario, ver m&eacute;tricas de sus clientes</td></tr>
+      <tr><td><span class="role-badge freelance">Freelance</span></td><td>Tareas asignadas + gui&oacute;nes espec&iacute;ficos</td><td>Completar tareas y gui&oacute;nes asignados por el ejecutivo</td></tr>
+      <tr><td><span class="role-badge cliente">Cliente Externo</span></td><td>Portal propio: gui&oacute;nes a aprobar, m&eacute;tricas propias</td><td>Aprobar gui&oacute;nes, ver sus m&eacute;tricas, descargar reportes mensuales</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════ TECNOLOGÍA ═══════════ -->
+<section id="tecnologia">
+  <span class="section-label">Infraestructura</span>
+  <h2>Tecnolog&iacute;a de Primer Nivel</h2>
+  <p class="section-desc">
+    Construida con las mismas tecnolog&iacute;as que usan Vercel, Linear y Notion. R&aacute;pida, segura y escalable. Cada cliente tiene sus datos completamente aislados.
+  </p>
+
+  <div class="tech-grid">
+    <div class="tech-item"><div class="tech-name">Next.js 16</div><div class="tech-desc">Framework web moderno, veloz</div></div>
+    <div class="tech-item"><div class="tech-name">Supabase</div><div class="tech-desc">Base de datos + auth + storage</div></div>
+    <div class="tech-item"><div class="tech-name">Vercel</div><div class="tech-desc">Hosting global, carga en menos de 1s</div></div>
+    <div class="tech-item"><div class="tech-name">PWA</div><div class="tech-desc">Instalable en celular como app</div></div>
+    <div class="tech-item"><div class="tech-name">Groq + Claude</div><div class="tech-desc">IA generativa para gui&oacute;nes</div></div>
+    <div class="tech-item"><div class="tech-name">Meta Graph API</div><div class="tech-desc">Instagram + Facebook metrics</div></div>
+    <div class="tech-item"><div class="tech-name">TikTok Business API</div><div class="tech-desc">M&eacute;tricas y contenido TikTok</div></div>
+    <div class="tech-item"><div class="tech-name">YouTube Data API</div><div class="tech-desc">Analytics y m&eacute;tricas YouTube</div></div>
+  </div>
+
+  <div class="cards-grid" style="margin-top:3rem">
+    <div class="info-card"><div class="card-icon">📱</div><h4>Funciona en celular</h4><p>Dise&ntilde;o 100% responsive. Se instala como app en el celular sin pasar por App Store. Los ejecutivos acceden desde cualquier lugar.</p></div>
+    <div class="info-card"><div class="card-icon">🔐</div><h4>Datos aislados por cliente</h4><p>Row-Level Security en Supabase: cada cliente solo puede ver sus propios datos, aunque compartan la misma base de datos.</p></div>
+    <div class="info-card"><div class="card-icon">⚡</div><h4>Carga ultra-r&aacute;pida</h4><p>Servido desde la red global de Vercel con CDN. Carga en menos de 1 segundo desde cualquier lugar de Chile.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ INVERSIÓN ═══════════ -->
+<section id="inversion">
+  <span class="section-label">Modelo Comercial</span>
+  <h2>Proyecto + Cuidado mensual</h2>
+  <p class="section-desc">
+    Construimos la plataforma por fases, con pagos en hitos. Despu&eacute;s del lanzamiento, el equipo SMC cuida el sistema: actualizaciones, soporte y mejoras continuas.
+  </p>
+
+  <div class="pricing-grid">
+    <div class="price-card featured">
+      <div class="featured-tag">Recomendado &mdash; Fase 1</div>
+      <div class="price-label">Plataforma base</div>
+      <h3>Dashboard + Gui&oacute;nes + M&eacute;tricas</h3>
+      <div style="margin-top:1rem"><span class="price-num">120</span><span class="price-unit"> UF &nbsp;&middot;&nbsp; 4&ndash;6 semanas</span></div>
+      <ul>
+        <li>Dashboard operativo por cliente</li>
+        <li>M&oacute;dulo de gui&oacute;nes con IA (Groq + Claude)</li>
+        <li>Sincronizaci&oacute;n Meta + TikTok + YouTube</li>
+        <li>Calendario editorial con alertas</li>
+        <li>Portal de aprobaci&oacute;n para clientes</li>
+        <li>Autenticaci&oacute;n + gesti&oacute;n de usuarios y roles</li>
+        <li>PWA instalable en celular</li>
+        <li>Hosting y dominio primer a&ntilde;o incluido</li>
+      </ul>
+      <div class="price-note">Pago en 3 hitos: inicio &middot; entrega beta &middot; lanzamiento</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Fase 2 &mdash; Opcional</div>
+      <h3>Finanzas + Publicaci&oacute;n autom&aacute;tica</h3>
+      <div style="margin-top:1rem"><span class="price-num">80</span><span class="price-unit"> UF &nbsp;&middot;&nbsp; 3&ndash;4 semanas</span></div>
+      <ul>
+        <li>M&oacute;dulo financiero: margen por cliente</li>
+        <li>Seguimiento de horas por cuenta</li>
+        <li>Estado de cobranza con alertas</li>
+        <li>Reporte financiero mensual autom&aacute;tico</li>
+        <li>Publicaci&oacute;n autom&aacute;tica desde la plataforma</li>
+      </ul>
+      <div class="price-note">Se activa despu&eacute;s de validar la Fase 1 en producci&oacute;n</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Care &mdash; mensual</div>
+      <h3>Soporte + Mejoras continuas</h3>
+      <div style="margin-top:1rem"><span class="price-num">12</span><span class="price-unit"> UF / mes</span></div>
+      <ul>
+        <li>Correcci&oacute;n de bugs en menos de 24h</li>
+        <li>Actualizaciones de seguridad</li>
+        <li>Ajustes de UI/UX menores sin costo</li>
+        <li>Cambios de datos (clientes, usuarios)</li>
+        <li>Monitoreo proactivo del sistema</li>
+      </ul>
+      <div class="price-note">M&iacute;nimo 3 meses. Sin contrato anual obligatorio.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem;padding:2rem;background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);border-radius:16px">
+    <h4 style="margin-bottom:0.75rem;font-size:1rem">No incluido en el precio</h4>
+    <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7">Costos de APIs externas (Meta Graph, TikTok Business, YouTube &mdash; seg&uacute;n plan) &middot; Dominio propio si ya se tiene uno &middot; Pauta publicitaria en redes sociales &middot; Costos de uso de IA (Groq / Claude) seg&uacute;n volumen de gui&oacute;nes generados</p>
+  </div>
+
+  <div style="margin-top:2rem">
+    <h3 style="margin-bottom:1rem">Hoja de ruta</h3>
+    <div class="roadmap">
+      <div class="roadmap-item done">
+        <h4>Fase 1 &mdash; Plataforma Base <span class="phase-tag next">PR&Oacute;XIMO</span></h4>
+        <p>Dashboard, login por roles, m&oacute;dulo de gui&oacute;nes con IA, sincronizaci&oacute;n de m&eacute;tricas (Meta, TikTok, YouTube), calendario editorial con alertas, portal de aprobaci&oacute;n para clientes.</p>
+      </div>
+      <div class="roadmap-item current">
+        <h4>Fase 2 &mdash; Finanzas + Publicaci&oacute;n <span class="phase-tag planned">PLANIFICADO</span></h4>
+        <p>M&oacute;dulo de margen por cliente, seguimiento de horas, estado de cobranza, reportes financieros autom&aacute;ticos y publicaci&oacute;n directa desde la plataforma.</p>
+      </div>
+      <div class="roadmap-item">
+        <h4>Fase 3 &mdash; Automatizaci&oacute;n Avanzada <span class="phase-tag planned">PLANIFICADO</span></h4>
+        <p>Programaci&oacute;n y publicaci&oacute;n autom&aacute;tica en todas las redes, sugerencias de mejor horario por cuenta, notificaciones push al cliente.</p>
+      </div>
+      <div class="roadmap-item">
+        <h4>Fase 4 &mdash; Portal Cliente Premium <span class="phase-tag planned">PLANIFICADO</span></h4>
+        <p>App dedicada para clientes: seguimiento de campa&ntilde;as en tiempo real, aprobaciones, chat directo con el ejecutivo y acceso a todos los reportes hist&oacute;ricos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="brand">Smart Connection</div>
+  <p style="margin-bottom:0.5rem">Creado por <a href="https://smconnection.cl" target="_blank">Smart Connection &middot; smconnection.cl</a></p>
+  <p>Propuesta confidencial preparada para <strong>Agencia Nathaly</strong> &bull; Mayo 2026</p>
+  <p style="margin-top:1rem;font-size:0.75rem;color:rgba(255,255,255,0.3)">guillermo.gonzalez@smconnection.cl</p>
+</footer>
+
+<!--
+═══════════════════════════════════════════════════════════════════
+TEMPLATE SWITCHER · componente compartido
+Copy this entire block into each propuesta-*.html BEFORE </body>
+═══════════════════════════════════════════════════════════════════
+-->
+
+<style>
+.tsw{position:fixed;left:24px;bottom:24px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif}
+.tsw-fab{
+  width:56px;height:56px;border-radius:50%;
+  background:conic-gradient(from 0deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#25f4ee,#fe2c55,#feda75);
+  border:none;cursor:pointer;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.30),0 0 0 3px rgba(255,255,255,.10);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+  animation:tswSpin 16s linear infinite;
+  position:relative;overflow:hidden;
+}
+.tsw-fab::after{
+  content:'🎨';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.80);border-radius:50%;font-size:22px;
+  margin:5px;
+}
+.tsw-fab:hover{transform:scale(1.12) rotate(15deg)}
+.tsw-fab.open{transform:scale(.92) rotate(45deg)}
+@keyframes tswSpin{to{filter:hue-rotate(360deg)}}
+
+.tsw-pulse{
+  position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid rgba(214,41,118,.50);
+  animation:tswPulse 2s infinite;pointer-events:none;
+}
+@keyframes tswPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+
+.tsw-menu{
+  position:absolute;bottom:72px;left:0;
+  background:rgba(15,15,15,.96);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.10);border-radius:18px;
+  padding:14px;min-width:280px;
+  opacity:0;transform:translateY(20px) scale(.92);pointer-events:none;
+  transition:opacity .3s,transform .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 30px 80px rgba(0,0,0,.50);
+}
+.tsw-menu.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.tsw-head{padding:6px 10px 12px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:10px}
+.tsw-head .h{font-size:13px;font-weight:800;color:#fff;letter-spacing:-.01em;margin-bottom:3px}
+.tsw-head .s{font-size:11px;color:rgba(255,255,255,.55);font-weight:500}
+.tsw-opt{
+  display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:10px;
+  text-decoration:none;color:#fff;cursor:pointer;transition:background .2s,transform .15s;margin-bottom:4px;
+}
+.tsw-opt:hover{background:rgba(255,255,255,.06);transform:translateX(4px)}
+.tsw-opt.active{background:rgba(214,41,118,.18);border:1px solid rgba(214,41,118,.40)}
+.tsw-thumb{width:48px;height:48px;border-radius:8px;flex-shrink:0;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.10)}
+.tsw-thumb-1{background:linear-gradient(135deg,#0a0a0a 60%,#d62976 100%)}
+.tsw-thumb-1::after{content:'IG';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:900;color:#fff;letter-spacing:.05em}
+.tsw-thumb-2{background:linear-gradient(135deg,#0F0A1A 0%,#7C3AED 80%,#D4A574 100%)}
+.tsw-thumb-2::after{content:'PR';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:900;color:#fff;letter-spacing:.05em}
+.tsw-thumb-3{background:linear-gradient(135deg,#ffffff 0%,#f5f5f7 100%);border-color:rgba(0,0,0,.08)}
+.tsw-thumb-3::after{content:'AP';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:900;color:#0a0a0a;letter-spacing:.05em}
+.tsw-info{flex:1;min-width:0}
+.tsw-info .n{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;letter-spacing:-.005em}
+.tsw-info .d{font-size:10.5px;color:rgba(255,255,255,.55);line-height:1.4;font-weight:500}
+.tsw-opt.active .tsw-info .n::after{content:' ✓';color:#d62976;font-weight:900}
+.tsw-foot{margin-top:8px;padding:10px 8px 4px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.04em;line-height:1.5}
+.tsw-foot strong{color:rgba(255,255,255,.75);font-weight:700}
+
+@media (max-width:900px){
+  .tsw{left:auto;right:90px;bottom:14px}
+  .tsw-menu{min-width:260px;left:auto;right:0}
+}
+@media (max-width:480px){
+  .tsw{right:80px;bottom:8px}
+  .tsw-fab{width:48px;height:48px}
+  .tsw-fab::after{font-size:18px}
+  .tsw-menu{min-width:240px;bottom:60px}
+}
+</style>
+
+<div class="tsw" id="tsw">
+  <button class="tsw-fab" id="tswFab" aria-label="Cambiar template">
+    <span class="tsw-pulse"></span>
+  </button>
+  <div class="tsw-menu" id="tswMenu">
+    <div class="tsw-head">
+      <div class="h">🎨 Cambia el template</div>
+      <div class="s">Misma propuesta · 3 estilos · pick tu favorito</div>
+    </div>
+    <a href="propuesta.html" class="tsw-opt" data-t="ig">
+      <div class="tsw-thumb tsw-thumb-1"></div>
+      <div class="tsw-info">
+        <div class="n">Instagram Layout</div>
+        <div class="d">Sidebar nativo IG · doble-tap heart · 15 motion</div>
+      </div>
+    </a>
+    <a href="propuesta-v2-purple.html" class="tsw-opt" data-t="purple">
+      <div class="tsw-thumb tsw-thumb-2"></div>
+      <div class="tsw-info">
+        <div class="n">Purple Premium</div>
+        <div class="d">Dark purple + gold · estilo Linear/Notion</div>
+      </div>
+    </a>
+    <a href="propuesta-v3-minimal.html" class="tsw-opt" data-t="minimal">
+      <div class="tsw-thumb tsw-thumb-3"></div>
+      <div class="tsw-info">
+        <div class="n">Apple Minimal</div>
+        <div class="d">White clean · tipografía editorial · serif</div>
+      </div>
+    </a>
+    <div class="tsw-foot">
+      <strong>SMC Design Atomic.</strong> Granularidad atómica · cambias el sistema visual sin tocar contenido. Las 3 versiones llevan el mismo mensaje en estilos distintos.
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const fab=document.getElementById('tswFab'),menu=document.getElementById('tswMenu');
+  if(!fab||!menu)return;
+  fab.addEventListener('click',()=>{
+    const o=menu.classList.toggle('open');
+    fab.classList.toggle('open',o);
+  });
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#tsw'))menu.classList.remove('open'),fab.classList.remove('open');
+  });
+  // Mark active by current file
+  const cur=location.pathname.split('/').pop()||'propuesta.html';
+  document.querySelectorAll('.tsw-opt').forEach(a=>{
+    if(a.getAttribute('href')===cur)a.classList.add('active');
+  });
+})();
+</script>
+
+</body>
+</html>

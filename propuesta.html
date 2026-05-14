@@ -1132,5 +1132,140 @@ if(fy){
 }
 </script>
 
+<!--
+═══════════════════════════════════════════════════════════════════
+TEMPLATE SWITCHER · componente compartido
+Copy this entire block into each propuesta-*.html BEFORE </body>
+═══════════════════════════════════════════════════════════════════
+-->
+
+<style>
+.tsw{position:fixed;left:24px;bottom:24px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif}
+.tsw-fab{
+  width:56px;height:56px;border-radius:50%;
+  background:conic-gradient(from 0deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#25f4ee,#fe2c55,#feda75);
+  border:none;cursor:pointer;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.30),0 0 0 3px rgba(255,255,255,.10);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+  animation:tswSpin 16s linear infinite;
+  position:relative;overflow:hidden;
+}
+.tsw-fab::after{
+  content:'🎨';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.80);border-radius:50%;font-size:22px;
+  margin:5px;
+}
+.tsw-fab:hover{transform:scale(1.12) rotate(15deg)}
+.tsw-fab.open{transform:scale(.92) rotate(45deg)}
+@keyframes tswSpin{to{filter:hue-rotate(360deg)}}
+
+.tsw-pulse{
+  position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid rgba(214,41,118,.50);
+  animation:tswPulse 2s infinite;pointer-events:none;
+}
+@keyframes tswPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+
+.tsw-menu{
+  position:absolute;bottom:72px;left:0;
+  background:rgba(15,15,15,.96);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.10);border-radius:18px;
+  padding:14px;min-width:280px;
+  opacity:0;transform:translateY(20px) scale(.92);pointer-events:none;
+  transition:opacity .3s,transform .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 30px 80px rgba(0,0,0,.50);
+}
+.tsw-menu.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.tsw-head{padding:6px 10px 12px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:10px}
+.tsw-head .h{font-size:13px;font-weight:800;color:#fff;letter-spacing:-.01em;margin-bottom:3px}
+.tsw-head .s{font-size:11px;color:rgba(255,255,255,.55);font-weight:500}
+.tsw-opt{
+  display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:10px;
+  text-decoration:none;color:#fff;cursor:pointer;transition:background .2s,transform .15s;margin-bottom:4px;
+}
+.tsw-opt:hover{background:rgba(255,255,255,.06);transform:translateX(4px)}
+.tsw-opt.active{background:rgba(214,41,118,.18);border:1px solid rgba(214,41,118,.40)}
+.tsw-thumb{width:48px;height:48px;border-radius:8px;flex-shrink:0;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.10)}
+.tsw-thumb-1{background:linear-gradient(135deg,#0a0a0a 60%,#d62976 100%)}
+.tsw-thumb-1::after{content:'IG';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:900;color:#fff;letter-spacing:.05em}
+.tsw-thumb-2{background:linear-gradient(135deg,#0F0A1A 0%,#7C3AED 80%,#D4A574 100%)}
+.tsw-thumb-2::after{content:'PR';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:900;color:#fff;letter-spacing:.05em}
+.tsw-thumb-3{background:linear-gradient(135deg,#ffffff 0%,#f5f5f7 100%);border-color:rgba(0,0,0,.08)}
+.tsw-thumb-3::after{content:'AP';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:900;color:#0a0a0a;letter-spacing:.05em}
+.tsw-info{flex:1;min-width:0}
+.tsw-info .n{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;letter-spacing:-.005em}
+.tsw-info .d{font-size:10.5px;color:rgba(255,255,255,.55);line-height:1.4;font-weight:500}
+.tsw-opt.active .tsw-info .n::after{content:' ✓';color:#d62976;font-weight:900}
+.tsw-foot{margin-top:8px;padding:10px 8px 4px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.04em;line-height:1.5}
+.tsw-foot strong{color:rgba(255,255,255,.75);font-weight:700}
+
+@media (max-width:900px){
+  .tsw{left:auto;right:90px;bottom:14px}
+  .tsw-menu{min-width:260px;left:auto;right:0}
+}
+@media (max-width:480px){
+  .tsw{right:80px;bottom:8px}
+  .tsw-fab{width:48px;height:48px}
+  .tsw-fab::after{font-size:18px}
+  .tsw-menu{min-width:240px;bottom:60px}
+}
+</style>
+
+<div class="tsw" id="tsw">
+  <button class="tsw-fab" id="tswFab" aria-label="Cambiar template">
+    <span class="tsw-pulse"></span>
+  </button>
+  <div class="tsw-menu" id="tswMenu">
+    <div class="tsw-head">
+      <div class="h">🎨 Cambia el template</div>
+      <div class="s">Misma propuesta · 3 estilos · pick tu favorito</div>
+    </div>
+    <a href="propuesta.html" class="tsw-opt" data-t="ig">
+      <div class="tsw-thumb tsw-thumb-1"></div>
+      <div class="tsw-info">
+        <div class="n">Instagram Layout</div>
+        <div class="d">Sidebar nativo IG · doble-tap heart · 15 motion</div>
+      </div>
+    </a>
+    <a href="propuesta-v2-purple.html" class="tsw-opt" data-t="purple">
+      <div class="tsw-thumb tsw-thumb-2"></div>
+      <div class="tsw-info">
+        <div class="n">Purple Premium</div>
+        <div class="d">Dark purple + gold · estilo Linear/Notion</div>
+      </div>
+    </a>
+    <a href="propuesta-v3-minimal.html" class="tsw-opt" data-t="minimal">
+      <div class="tsw-thumb tsw-thumb-3"></div>
+      <div class="tsw-info">
+        <div class="n">Apple Minimal</div>
+        <div class="d">White clean · tipografía editorial · serif</div>
+      </div>
+    </a>
+    <div class="tsw-foot">
+      <strong>SMC Design Atomic.</strong> Granularidad atómica · cambias el sistema visual sin tocar contenido. Las 3 versiones llevan el mismo mensaje en estilos distintos.
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const fab=document.getElementById('tswFab'),menu=document.getElementById('tswMenu');
+  if(!fab||!menu)return;
+  fab.addEventListener('click',()=>{
+    const o=menu.classList.toggle('open');
+    fab.classList.toggle('open',o);
+  });
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#tsw'))menu.classList.remove('open'),fab.classList.remove('open');
+  });
+  // Mark active by current file
+  const cur=location.pathname.split('/').pop()||'propuesta.html';
+  document.querySelectorAll('.tsw-opt').forEach(a=>{
+    if(a.getAttribute('href')===cur)a.classList.add('active');
+  });
+})();
+</script>
+
 </body>
 </html>
