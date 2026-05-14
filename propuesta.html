@@ -461,8 +461,40 @@ footer p{font-size:11px;color:var(--gray-2);letter-spacing:.04em}
 [data-theme="minimal"] .cta-btn{background:#fff;color:#0a0a0a}
 [data-theme="minimal"] .total-band{background:#0a0a0a;color:#fff}
 
+/* PURPLE · refuerzo overrides: story bars, avatars, phone screen, etc */
+[data-theme="purple"] .belt-progress,[data-theme="purple"] .story-bar .fill{background:linear-gradient(90deg,#7C3AED 0%,#A78BFA 50%,#D4A574 100%) !important}
+[data-theme="purple"] .nav-avatar-inner,[data-theme="purple"] .real-avatar-inner,[data-theme="purple"] .team-avatar-inner,[data-theme="purple"] .hero-phone-screen{background:linear-gradient(180deg,#7C3AED 0%,#5B21B6 50%,#D4A574 100%)}
+[data-theme="purple"] .hero-phone-screen{animation:none}
+[data-theme="purple"] .nav-avatar::before,[data-theme="purple"] .real-avatar::before,[data-theme="purple"] .team-avatar::before{background:conic-gradient(from 0deg,#7C3AED,#A78BFA,#D4A574,#5B21B6,#7C3AED) !important}
+[data-theme="purple"] .hero-eyebrow{background:rgba(124,58,237,.10);border-color:rgba(124,58,237,.30)}
+[data-theme="purple"] .hero-eyebrow .dot{background:#D4A574}
+[data-theme="purple"] .tsw-fab{background:conic-gradient(from 0deg,#7C3AED,#A78BFA,#D4A574,#5B21B6,#7C3AED)}
+[data-theme="purple"] .ig-sb-badge{background:#D4A574}
+[data-theme="purple"] .eyebrow{color:#D4A574}
+[data-theme="purple"] h2.title em,[data-theme="purple"] .hero h1 em{background:linear-gradient(135deg,#7C3AED 0%,#D4A574 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* MINIMAL · refuerzo overrides */
+[data-theme="minimal"] .belt-progress{background:#e8e8ed}
+[data-theme="minimal"] .story-bar{background:rgba(0,0,0,.10)}
+[data-theme="minimal"] .story-bar .fill{background:#0a0a0a !important}
+[data-theme="minimal"] .nav-avatar-inner,[data-theme="minimal"] .real-avatar-inner,[data-theme="minimal"] .team-avatar-inner{background:#0a0a0a;color:#fff}
+[data-theme="minimal"] .nav-avatar::before,[data-theme="minimal"] .real-avatar::before,[data-theme="minimal"] .team-avatar::before{background:#0a0a0a !important;animation:none}
+[data-theme="minimal"] .hero-phone-screen{background:#0a0a0a;color:#fff;animation:none}
+[data-theme="minimal"] .hero-eyebrow{background:#f5f5f7;border-color:#e8e8ed;color:#6e6e73}
+[data-theme="minimal"] .hero-eyebrow .dot{background:#0a0a0a}
+[data-theme="minimal"] .tsw-fab{background:#0a0a0a;animation:none}
+[data-theme="minimal"] .tsw-fab::after{background:#fff;color:#0a0a0a}
+[data-theme="minimal"] .ig-sb-badge{background:#fe2c55}
+[data-theme="minimal"] .eyebrow{color:#0066cc}
+[data-theme="minimal"] .eyebrow::before{background:#0066cc}
+[data-theme="minimal"] h2.title em,[data-theme="minimal"] .hero h1 em{background:none;-webkit-text-fill-color:#0066cc;color:#0066cc;font-style:italic}
+[data-theme="minimal"] section.bleed .container .total-band .num{color:#fff}
+
+/* IG theme default · si se eligió explícitamente */
+[data-theme="ig"] body{background:var(--ink);color:var(--white)}
+
 /* Smooth transitions entre themes */
-body,section,.phase,.tech-card,.team-card,.real-phone,.hero,.nav,.ig-sidebar,.hashtag-marquee,footer{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
+body,section,.phase,.tech-card,.team-card,.real-phone,.hero,.nav,.ig-sidebar,.hashtag-marquee,footer,.hero-phone-screen,.belt-progress,.story-bar,.nav-avatar-inner,.real-avatar-inner,.team-avatar-inner{transition:background-color .35s ease,color .35s ease,border-color .35s ease,background .35s ease}
 
 /* ════════════════════════════════════════════════════
    MOTION SIGNATURE · RedesSociales.cl · vertical IG/TikTok
